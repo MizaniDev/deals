@@ -1,7 +1,7 @@
 package com.mizanidev.deals.api
 
 import com.mizanidev.deals.model.GamesRequest
-import com.mizanidev.deals.model.SingleGameRequest
+import com.mizanidev.deals.model.game.SingleGameRequest
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
