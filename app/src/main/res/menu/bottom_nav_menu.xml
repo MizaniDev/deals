@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/navigation_recent_releases"
+            android:icon="@drawable/ic_recent_releases"
+            android:title="@string/recent_releases"/>
+
+    <item
+            android:id="@+id/navigation_deals"
+            android:icon="@drawable/ic_deals"
+            android:title="@string/deals"/>
+
+    <item
+            android:id="@+id/navigation_soon"
+            android:icon="@drawable/ic_soon"
+            android:title="@string/soon"/>
+
+    <item
+            android:id="@+id/navigation_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/settings"/>
+
+</menu>

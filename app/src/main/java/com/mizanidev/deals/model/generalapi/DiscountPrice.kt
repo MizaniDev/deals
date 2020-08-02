@@ -1,4 +1,4 @@
-package com.mizanidev.deals.model
+package com.mizanidev.deals.model.generalapi
 
 import com.google.gson.annotations.SerializedName
 

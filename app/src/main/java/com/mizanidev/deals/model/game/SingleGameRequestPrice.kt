@@ -1,7 +1,7 @@
 package com.mizanidev.deals.model.game
 
 import com.google.gson.annotations.SerializedName
-import com.mizanidev.deals.model.Country
+import com.mizanidev.deals.model.generalapi.Country
 
 data class SingleGameRequestPrice(
     @SerializedName("best_price")

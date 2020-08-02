@@ -1,4 +1,4 @@
-package com.mizanidev.deals.model
+package com.mizanidev.deals.model.generalapi
 
 data class Links(
     val actualLink: String,

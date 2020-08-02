@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey_dcd">
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/size_5dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_settings_region"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/settings_row_string"
+                    tools:itemCount="2">
+
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/size_30dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_settings_help"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/settings_row_string"
+                    tools:itemCount="3">
+
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/size_30dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_settings_follow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/settings_row_string"
+                    tools:itemCount="2">
+
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/size_30dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_settings_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/settings_row_string"
+                    tools:itemCount="2">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -1,9 +1,6 @@
-package com.mizanidev.deals.model
+package com.mizanidev.deals.model.generalapi
 
 import com.google.gson.annotations.SerializedName
-import com.mizanidev.deals.model.Country
-import com.mizanidev.deals.model.DiscountPrice
-import com.mizanidev.deals.model.RegularPrice
 
 data class PriceInfo(
     @SerializedName("best_price")

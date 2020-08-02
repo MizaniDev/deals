@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Deals</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+    <string name="recent_releases">Lançamentos</string>
+    <string name="deals">Promoções</string>
+    <string name="soon">Em Breve</string>
+    <string name="settings">Configurações</string>
+    
+    //Settings
+    <string name="region">Região</string>
+    <string name="currency">Moeda</string>
+    <string name="translate_app">Traduzir o app</string>
+    <string name="suggestions">Sugestões</string>
+    <string name="known_bugs">Bugs conhecidos</string>
+    <string name="my_twitter">Meu Twitter</string>
+    <string name="partner_instagram">Instagram parceiro</string>
+    <string name="rate_us">Avalie o app</string>
+    <string name="app_version">Versão do app</string>
+
 </resources>
