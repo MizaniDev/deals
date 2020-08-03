@@ -57,15 +57,15 @@ class SettingsFragment: Fragment() {
         when(viewType){
             REGION_VIEW -> {
                 return listOf(
-                    Settings(SettingsIds.ID_REGION, R.drawable.world_icon, getString(R.string.region)),
-                    Settings(SettingsIds.ID_CURRENCY, R.drawable.world_icon, getString(R.string.currency))
+                    Settings(SettingsIds.ID_REGION, R.drawable.region, getString(R.string.region)),
+                    Settings(SettingsIds.ID_CURRENCY, R.drawable.currency, getString(R.string.currency))
                 )
             }
             HELP_US -> {
                 return listOf(
-                    Settings(SettingsIds.ID_TRANSLATE, R.drawable.world_icon, getString(R.string.translate_app)),
-                    Settings(SettingsIds.ID_SUGGESTIONS, R.drawable.world_icon, getString(R.string.suggestions)),
-                    Settings(SettingsIds.ID_BUGS, R.drawable.world_icon, getString(R.string.known_bugs))
+                    Settings(SettingsIds.ID_TRANSLATE, R.drawable.translate, getString(R.string.translate_app)),
+                    Settings(SettingsIds.ID_SUGGESTIONS, R.drawable.suggestions, getString(R.string.suggestions)),
+                    Settings(SettingsIds.ID_BUGS, R.drawable.bugs, getString(R.string.known_bugs))
                 )
             }
             FOLLOW_US -> {
@@ -76,8 +76,8 @@ class SettingsFragment: Fragment() {
             }
             APP_DETAILS -> {
                 return listOf(
-                    Settings(SettingsIds.ID_RATE, R.drawable.world_icon, getString(R.string.rate_us)),
-                    Settings(SettingsIds.ID_VERSION, R.drawable.world_icon, getString(R.string.app_version))
+                    Settings(SettingsIds.ID_RATE, R.drawable.rateus, getString(R.string.rate_us)),
+                    Settings(SettingsIds.ID_VERSION, R.drawable.version, getString(R.string.app_version))
                 )
             }
 

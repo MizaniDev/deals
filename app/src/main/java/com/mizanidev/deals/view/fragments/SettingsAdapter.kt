@@ -1,6 +1,7 @@
 package com.mizanidev.deals.view.fragments
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,11 +37,12 @@ class SettingsAdapter(private val context: Context, private val settings: List<S
         holder.selected.text = setting.selected
         holder.navigation.setImageResource(setting.navigate)
 
-//        holder.itemView?.setOnClickListener {
+        holder.itemView?.setOnClickListener {
+            Log.i("SEL", setting.description)
 //            var intent = Intent(context, GameActivity::class.java)
 //            intent.putExtra("slug", game.slug)
 //            context?.startActivity(intent)
-//        }
+        }
 
     }
 }
