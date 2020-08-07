@@ -1,7 +1,6 @@
-package com.mizanidev.deals.view.fragments
+package com.mizanidev.deals.view.fragments.settings
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +9,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mizanidev.deals.R
 import com.mizanidev.deals.model.utils.Settings
+import com.mizanidev.deals.view.fragments.RecyclerViewSettingsListener
 import kotlinx.android.synthetic.main.settings_row_string.view.*
 
-class SettingsAdapter(private val context: Context, private val settings: List<Settings>)
+class SettingsAdapter(private val context: Context, private val settings: List<Settings>,
+                      private val recyclerViewSettingsListener: RecyclerViewSettingsListener
+)
     : RecyclerView.Adapter<SettingsAdapter.ViewHolder>(){
+
+
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val icon: ImageView = itemView.image_settings_row_icon
@@ -37,12 +41,7 @@ class SettingsAdapter(private val context: Context, private val settings: List<S
         holder.selected.text = setting.selected
         holder.navigation.setImageResource(setting.navigate)
 
-        holder.itemView?.setOnClickListener {
-            Log.i("SEL", setting.description)
-//            var intent = Intent(context, GameActivity::class.java)
-//            intent.putExtra("slug", game.slug)
-//            context?.startActivity(intent)
-        }
+        holder.itemView?.setOnClickListener { recyclerViewSettingsListener.onItemClickListener(setting) }
 
     }
 }

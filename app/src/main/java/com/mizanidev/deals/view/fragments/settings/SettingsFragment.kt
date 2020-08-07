@@ -1,26 +1,38 @@
-package com.mizanidev.deals.view.fragments
+package com.mizanidev.deals.view.fragments.settings
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mizanidev.deals.BuildConfig
 import com.mizanidev.deals.R
+import com.mizanidev.deals.model.others.Currency
 import com.mizanidev.deals.model.utils.Settings
 import com.mizanidev.deals.model.utils.SettingsIds
+import com.mizanidev.deals.util.SharedPreferenceConstants
+import com.mizanidev.deals.view.fragments.BaseFragment
+import com.mizanidev.deals.view.fragments.RecyclerViewSettingsListener
+import com.mizanidev.deals.view.fragments.settings.currency.CurrencyAlertList
+import com.mizanidev.deals.view.fragments.settings.currency.CurrencyCallback
+import com.mizanidev.deals.viewmodel.DealsViewModel
+import com.mizanidev.deals.viewmodel.ViewState
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 private const val REGION_VIEW = 1
 private const val HELP_US = 2
 private const val FOLLOW_US = 3
 private const val APP_DETAILS = 4
 
-class SettingsFragment: Fragment() {
+class SettingsFragment: BaseFragment(), RecyclerViewSettingsListener, CurrencyCallback {
     private lateinit var settingRegion: RecyclerView
     private lateinit var settingHelp: RecyclerView
     private lateinit var settingFollow: RecyclerView
     private lateinit var settingApp: RecyclerView
+
+    private val viewModel: DealsViewModel by sharedViewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_settings, container, false)
@@ -30,6 +42,7 @@ class SettingsFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initComponents(view)
         setOptions()
+        observeViewModel()
     }
 
     private fun initComponents(view: View){
@@ -40,17 +53,41 @@ class SettingsFragment: Fragment() {
     }
 
     private fun setOptions(){
-        settingRegion.adapter = SettingsAdapter(requireContext(), showSettings(REGION_VIEW))
+        settingRegion.adapter = SettingsAdapter(
+            requireContext(),
+            showSettings(REGION_VIEW),
+            this
+        )
         settingRegion.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
-        settingHelp.adapter = SettingsAdapter(requireContext(), showSettings(HELP_US))
+        settingHelp.adapter = SettingsAdapter(
+            requireContext(),
+            showSettings(HELP_US),
+            this
+        )
         settingHelp.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
-        settingFollow.adapter = SettingsAdapter(requireContext(), showSettings(FOLLOW_US))
+        settingFollow.adapter = SettingsAdapter(
+            requireContext(),
+            showSettings(FOLLOW_US),
+            this
+        )
         settingFollow.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
-        settingApp.adapter = SettingsAdapter(requireContext(), showSettings(APP_DETAILS))
+        settingApp.adapter = SettingsAdapter(
+            requireContext(),
+            showSettings(APP_DETAILS),
+            this
+        )
         settingApp.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+    }
+
+    private fun observeViewModel(){
+        viewModel.viewState.observe(viewLifecycleOwner, Observer {
+            when(it){
+                is ViewState.ShowCurrencies -> showCurrencies(it.listCurrencies)
+            }
+        })
     }
 
     private fun showSettings(viewType: Int) : List<Settings>{
@@ -58,7 +95,12 @@ class SettingsFragment: Fragment() {
             REGION_VIEW -> {
                 return listOf(
                     Settings(SettingsIds.ID_REGION, R.drawable.region, getString(R.string.region)),
-                    Settings(SettingsIds.ID_CURRENCY, R.drawable.currency, getString(R.string.currency))
+
+                    Settings(
+                        SettingsIds.ID_CURRENCY,
+                        R.drawable.currency,
+                        getString(R.string.currency),
+                        listener?.sharedPreference()!!.stringConfig(SharedPreferenceConstants.CURRENCY))
                 )
             }
             HELP_US -> {
@@ -77,12 +119,30 @@ class SettingsFragment: Fragment() {
             APP_DETAILS -> {
                 return listOf(
                     Settings(SettingsIds.ID_RATE, R.drawable.rateus, getString(R.string.rate_us)),
-                    Settings(SettingsIds.ID_VERSION, R.drawable.version, getString(R.string.app_version))
+
+                    Settings(
+                        SettingsIds.ID_VERSION,
+                        R.drawable.version,
+                        getString(R.string.app_version),
+                        BuildConfig.VERSION_NAME)
                 )
             }
 
         }
 
         return listOf()
+    }
+
+    override fun onItemClickListener(settingConfig: Settings) {
+        viewModel.configureSettings(settingConfig)
+
+    }
+
+    private fun showCurrencies(currencies: List<Currency>){
+        CurrencyAlertList(this, currencies, this).showAlert()
+    }
+
+    override fun onAlertClosedByOptionSelected() {
+        setOptions()
     }
 }

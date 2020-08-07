@@ -7,7 +7,7 @@ import org.koin.dsl.module
 val mainModule = module {
 
     viewModel {
-        DealsViewModel()
+        DealsViewModel(get())
     }
 
 }

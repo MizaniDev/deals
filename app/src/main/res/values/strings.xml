@@ -18,4 +18,6 @@
     <string name="rate_us">Avalie o app</string>
     <string name="app_version">Versão do app</string>
 
+    <string name="select_currency">Selecione a moeda</string>
+
 </resources>

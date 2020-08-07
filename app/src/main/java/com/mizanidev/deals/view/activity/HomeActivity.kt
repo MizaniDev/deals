@@ -6,10 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.mizanidev.deals.R
+import com.mizanidev.deals.util.SharedPreferenceUtil
 import com.mizanidev.deals.view.ScreenFlow
-import com.mizanidev.deals.view.fragments.SettingsFragment
+import com.mizanidev.deals.view.fragments.BaseFragment
+import com.mizanidev.deals.view.fragments.DealsInterface
+import com.mizanidev.deals.view.fragments.settings.SettingsFragment
 
-class HomeActivity : AppCompatActivity(), ScreenFlow {
+open class HomeActivity : AppCompatActivity(), ScreenFlow, DealsInterface {
 
     private lateinit var textMessage: TextView
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -43,9 +46,19 @@ class HomeActivity : AppCompatActivity(), ScreenFlow {
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 
+    override fun onAttachFragment(fragment: Fragment) {
+        if(fragment is BaseFragment) {
+            fragment.listener = this
+        }
+    }
+
     override fun callFragment(fragment: Fragment) {
         val fragmentOptions = supportFragmentManager.beginTransaction()
         fragmentOptions.replace(R.id.container, fragment)
         fragmentOptions.commit()
+    }
+
+    override fun sharedPreference(): SharedPreferenceUtil {
+        return SharedPreferenceUtil(this)
     }
 }
