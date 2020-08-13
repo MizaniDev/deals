@@ -20,4 +20,25 @@
 
     <string name="select_currency">Selecione a moeda</string>
 
+    //Game Activity
+    <string name="information">Informações</string>
+    <string name="release_date">Data de Lançamento: %s</string>
+    <string name="has_demo">Demo Disponível: %s</string>
+    <string name="game_size">Tamanho: %s</string>
+    <string name="publishers">Publicadora(s): %s</string>
+    <string name="number_of_players">Número de Jogadores: %s</string>
+    <string name="physical_media">Mídia Física: %s</string>
+    <string name="best_price">Melhor Preço: %s</string>
+    <string name="country">País: %s</string>
+    <string name="game_status">Status: %s</string>
+    <string name="gold_points">Pontos de Ouro: %s</string>
+    <string name="see_trailer">Ver Trailer</string>
+    <string name="prices">Preços</string>
+    <string name="language">Idiomas</string>
+    <string name="categories">Categorias</string>
+    <string name="description">Descrição</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="fechar">Fechar</string>
+
 </resources>

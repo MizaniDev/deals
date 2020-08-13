@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="vertical"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+	<LinearLayout
+			android:id="@+id/game_progress"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:visibility="gone"
+			android:gravity="center_horizontal|center_vertical">
+
+		<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+
+			<ProgressBar
+					android:layout_width="55dp"
+					android:layout_height="55dp"
+					android:indeterminate="true"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center_horizontal"
+				android:orientation="vertical">
+
+				<ImageView
+						android:id="@+id/img_game_image"
+						android:layout_width="200dp"
+						android:layout_height="200dp"
+						android:layout_marginTop="20dp"
+						android:src="@drawable/dk"/>
+
+				<TextView
+						android:id="@+id/txt_game_title"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:gravity="center_horizontal"
+						android:textStyle="bold"
+						android:textSize="24sp"
+						android:layout_marginTop="10dp"
+						android:text="Donkey Kong Country: Tropical Freeze"/>
+
+				<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center"
+						android:layout_marginTop="10dp"
+						android:orientation="horizontal">
+
+					<ImageView
+							android:id="@+id/img_game_platform_logo"
+							android:layout_width="35dp"
+							android:layout_height="35dp"
+							android:layout_marginEnd="10dp"
+							android:src="@drawable/nintendo"/>
+
+					<TextView
+							android:id="@+id/txt_game_price"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textSize="18sp"
+							android:textStyle="bold"
+							android:text="BRL 150,00"/>
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:layout_marginTop="35dp">
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:text="@string/information"
+					android:textStyle="bold"
+					android:gravity="center_horizontal"
+					android:layout_marginBottom="15dp"
+					android:textSize="24sp"/>
+
+				<TextView
+					android:id="@+id/txt_game_releasedate"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:textSize="16sp"
+					android:layout_marginBottom="5dp"
+					android:text="@string/release_date"/>
+
+				<TextView
+					android:id="@+id/txt_game_hasdemo"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:textSize="16sp"
+					android:layout_marginBottom="5dp"
+					android:text="@string/has_demo"/>
+
+				<TextView
+					android:id="@+id/txt_game_size"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:textSize="16sp"
+					android:layout_marginBottom="5dp"
+					android:text="@string/game_size"/>
+
+				<TextView
+						android:id="@+id/txt_game_publisher"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:textSize="16sp"
+						android:layout_marginBottom="5dp"
+						android:text="@string/publishers"/>
+
+				<TextView
+						android:id="@+id/txt_game_players"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:textSize="16sp"
+						android:layout_marginBottom="5dp"
+						android:text="@string/number_of_players"/>
+
+				<TextView
+						android:id="@+id/txt_game_physical"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:textSize="16sp"
+						android:layout_marginBottom="5dp"
+						android:text="@string/physical_media"/>
+
+				<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center_horizontal"
+						android:layout_marginTop="35dp"
+						android:orientation="horizontal">
+
+					<Button
+							android:id="@+id/button_game_languages"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:textSize="16sp"
+							android:layout_marginBottom="5dp"
+							style="@style/Widget.AppCompat.Button.Borderless.Colored"
+							android:text="@string/language"/>
+
+					<Button
+							android:id="@+id/button_game_categories"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:textSize="16sp"
+							android:layout_weight="1"
+							android:layout_marginBottom="5dp"
+							style="@style/Widget.AppCompat.Button.Borderless.Colored"
+							android:text="@string/categories"/>
+
+					<Button
+							android:id="@+id/button_game_description"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:textSize="16sp"
+							android:layout_marginBottom="5dp"
+							style="@style/Widget.AppCompat.Button.Borderless.Colored"
+							android:text="@string/description"/>
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:layout_marginTop="35dp">
+
+				<TextView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="@string/prices"
+						android:textStyle="bold"
+						android:gravity="center_horizontal"
+						android:layout_marginBottom="15dp"
+						android:textSize="24sp"/>
+
+				<TextView
+						android:id="@+id/txt_game_bestprice"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:textSize="16sp"
+						android:layout_marginBottom="5dp"
+						android:text="@string/best_price"/>
+
+				<TextView
+						android:id="@+id/txt_game_country"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:textSize="16sp"
+						android:layout_marginBottom="5dp"
+						android:text="@string/country"/>
+
+				<TextView
+						android:id="@+id/txt_game_status"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:textSize="16sp"
+						android:layout_marginBottom="5dp"
+						android:text="@string/game_status"/>
+
+				<TextView
+						android:id="@+id/txt_game_goldpoints"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:textSize="16sp"
+						android:layout_marginBottom="5dp"
+						android:text="@string/gold_points"/>
+
+				<Button
+						android:id="@+id/button_game_trailer"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="35dp"
+						android:layout_marginBottom="20dp"
+						android:text="@string/see_trailer"/>
+
+			</LinearLayout>
+
+
+		</LinearLayout>
+
+	</ScrollView>
+
+</LinearLayout>

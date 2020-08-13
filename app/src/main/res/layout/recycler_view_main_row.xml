@@ -46,12 +46,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/size_9dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:text="BRL 180,64"/>
 
             <TextView
                     android:id="@+id/txt_price_original"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:text="BRL 250,00"/>
 
         </LinearLayout>

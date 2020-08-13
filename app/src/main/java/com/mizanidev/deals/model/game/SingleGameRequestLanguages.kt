@@ -6,5 +6,5 @@ data class SingleGameRequestLanguages(
     @SerializedName("region")
     val region: String,
     @SerializedName("languages")
-    val languages: List<SingleGameRequestLanguagesByRegion>
+    val languages: List<SingleGameRequestLanguagesByRegion>?
 )

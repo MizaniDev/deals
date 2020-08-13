@@ -15,5 +15,5 @@ data class SingleGameRequestPrice(
     @SerializedName("physical_release")
     val physicalRelease: Boolean,
     @SerializedName("country")
-    val country: Country
+    val country: Country?
 )

@@ -2,7 +2,7 @@ package com.mizanidev.deals.model.generalapi
 
 import com.google.gson.annotations.SerializedName
 
-data class ListaGames(
+data class GamesList(
     @SerializedName("platform")
     val platform: String,
     @SerializedName("slug")
@@ -16,6 +16,6 @@ data class ListaGames(
     @SerializedName("releaseDateOrder")
     val releaseDateOrder: String,
     @SerializedName("price_info")
-    val priceInfo: PriceInfo
+    val priceInfo: PriceInfo?
 
 )

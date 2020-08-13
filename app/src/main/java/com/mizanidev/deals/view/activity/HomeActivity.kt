@@ -10,23 +10,25 @@ import com.mizanidev.deals.util.SharedPreferenceUtil
 import com.mizanidev.deals.view.ScreenFlow
 import com.mizanidev.deals.view.fragments.BaseFragment
 import com.mizanidev.deals.view.fragments.DealsInterface
+import com.mizanidev.deals.view.fragments.onsale.OnSaleFragment
+import com.mizanidev.deals.view.fragments.releases.ReleasesFragment
 import com.mizanidev.deals.view.fragments.settings.SettingsFragment
+import com.mizanidev.deals.view.fragments.soon.SoonFragment
 
 open class HomeActivity : AppCompatActivity(), ScreenFlow, DealsInterface {
 
-    private lateinit var textMessage: TextView
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_recent_releases -> {
-                textMessage.setText(R.string.recent_releases)
+                callFragment(ReleasesFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_deals -> {
-                textMessage.setText(R.string.deals)
+                callFragment(OnSaleFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_soon -> {
-                textMessage.setText(R.string.soon)
+                callFragment(SoonFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_settings -> {
@@ -41,9 +43,8 @@ open class HomeActivity : AppCompatActivity(), ScreenFlow, DealsInterface {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-
-        textMessage = findViewById(R.id.message)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        navView.selectedItemId = R.id.navigation_recent_releases
     }
 
     override fun onAttachFragment(fragment: Fragment) {
@@ -54,7 +55,7 @@ open class HomeActivity : AppCompatActivity(), ScreenFlow, DealsInterface {
 
     override fun callFragment(fragment: Fragment) {
         val fragmentOptions = supportFragmentManager.beginTransaction()
-        fragmentOptions.replace(R.id.container, fragment)
+        fragmentOptions.replace(R.id.content, fragment)
         fragmentOptions.commit()
     }
 

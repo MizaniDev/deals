@@ -18,6 +18,11 @@
                 android:screenOrientation="portrait">
         </activity>
         <activity
+                android:name="com.mizanidev.deals.view.activity.GameActivity"
+                android:label="@string/title_activity_home"
+                android:screenOrientation="portrait">
+        </activity>
+        <activity
                 android:name="com.mizanidev.deals.view.activity.SplashScreen"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppCompat.FullScreen">

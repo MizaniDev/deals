@@ -12,7 +12,7 @@ data class PriceInfo(
     @SerializedName("rawCurrentPrice")
     val rawCurrentPrice: Double,
     @SerializedName("hasDiscount")
-    val hasDiscount: Boolean,
+    val hasDiscount: Boolean = false,
     @SerializedName("status")
     val status: String,
     @SerializedName("goldPoints")
@@ -22,9 +22,9 @@ data class PriceInfo(
     @SerializedName("physical_release")
     val physicalRelease: Boolean,
     @SerializedName("country")
-    val country: Country,
+    val country: Country?,
     @SerializedName("regularPrice")
-    val regularPrice: RegularPrice,
+    val regularPrice: RegularPrice?,
     @SerializedName("discountPrice")
-    val discountPrice: DiscountPrice
+    val discountPrice: DiscountPrice?
 )

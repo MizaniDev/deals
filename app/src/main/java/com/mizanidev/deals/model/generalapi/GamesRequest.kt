@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class GamesRequest(
     @SerializedName("links")
-    val links: Links,
+    val links: Links?,
     @SerializedName("data")
-    val listaGames: List<ListaGames>
+    val gameLists: List<GamesList>
 )

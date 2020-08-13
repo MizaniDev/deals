@@ -22,11 +22,11 @@ data class SingleGameRequestInfo(
     @SerializedName("youtubeId")
     val youtubeId: String,
     @SerializedName("publishers")
-    val publishers: List<SingleGameRequestPublishers>,
+    val publishers: List<SingleGameRequestPublishers>?,
     @SerializedName("languages")
-    val languages: List<SingleGameRequestLanguages>,
+    val languages: List<SingleGameRequestLanguages>?,
     @SerializedName("categories")
     val categories: List<String>,
     @SerializedName("price_info")
-    val priceInfo: SingleGameRequestPrice
+    val priceInfo: SingleGameRequestPrice?
 )

@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class SingleGameRequest(
     @SerializedName("data")
-    val data: SingleGameRequestInfo
+    val data: SingleGameRequestInfo?
 )

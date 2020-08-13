@@ -15,8 +15,10 @@ interface NintendoEndpoint {
     fun gamesOnSale(@QueryMap query: Map<String, String>, @Query("filter[on_sale]") onSale: Boolean): Call<GamesRequest>
     @GET("games?")
     fun recentReleases(@QueryMap query: Map<String, String>, @Query("filter[recent_release]") recentRelease: Boolean): Call<GamesRequest>
-    @GET("games{gameToShow}?")
+    @GET("games/{gameToShow}?")
     fun showGame(@Path("gameToShow") title: String, @QueryMap query: Map<String, String>): Call<SingleGameRequest>
+    @GET("games?")
+    fun soonGames(@QueryMap query: Map<String, String>, @Query("filter[coming_soon]") recentRelease: Boolean): Call<GamesRequest>
     @GET("currencies")
     fun currencies() : Call<CurrencyData>
 }
