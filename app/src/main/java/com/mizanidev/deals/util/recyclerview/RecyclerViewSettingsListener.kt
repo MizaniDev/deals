@@ -1,4 +1,4 @@
-package com.mizanidev.deals.view.fragments
+package com.mizanidev.deals.util.recyclerview
 
 import com.mizanidev.deals.model.utils.Settings
 

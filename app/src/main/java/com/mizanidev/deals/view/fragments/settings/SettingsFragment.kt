@@ -14,7 +14,7 @@ import com.mizanidev.deals.model.utils.Settings
 import com.mizanidev.deals.model.utils.SettingsIds
 import com.mizanidev.deals.util.SharedPreferenceConstants
 import com.mizanidev.deals.view.fragments.BaseFragment
-import com.mizanidev.deals.view.fragments.RecyclerViewSettingsListener
+import com.mizanidev.deals.util.recyclerview.RecyclerViewSettingsListener
 import com.mizanidev.deals.view.fragments.settings.currency.CurrencyAlertList
 import com.mizanidev.deals.view.fragments.settings.currency.CurrencyCallback
 import com.mizanidev.deals.viewmodel.DealsViewModel
@@ -26,7 +26,8 @@ private const val HELP_US = 2
 private const val FOLLOW_US = 3
 private const val APP_DETAILS = 4
 
-class SettingsFragment: BaseFragment(), RecyclerViewSettingsListener, CurrencyCallback {
+class SettingsFragment: BaseFragment(),
+    RecyclerViewSettingsListener, CurrencyCallback {
     private lateinit var settingRegion: RecyclerView
     private lateinit var settingHelp: RecyclerView
     private lateinit var settingFollow: RecyclerView

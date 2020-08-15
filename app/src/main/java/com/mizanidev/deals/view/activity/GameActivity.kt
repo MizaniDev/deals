@@ -1,5 +1,7 @@
 package com.mizanidev.deals.view.activity
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -11,7 +13,8 @@ import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.mizanidev.deals.R
 import com.mizanidev.deals.model.game.SingleGameRequestInfo
-import com.mizanidev.deals.model.utils.Util
+import com.mizanidev.deals.util.Url
+import com.mizanidev.deals.util.Util
 import com.mizanidev.deals.viewmodel.DealsViewModel
 import com.mizanidev.deals.viewmodel.ViewState
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -38,6 +41,7 @@ class GameActivity : AppCompatActivity() {
     private lateinit var txtStatus: TextView
     private lateinit var txtGoldPoints: TextView
 
+    private lateinit var util: Util
     private val viewModel: DealsViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,6 +75,8 @@ class GameActivity : AppCompatActivity() {
         txtCountry = findViewById(R.id.txt_game_country)
         txtStatus = findViewById(R.id.txt_game_status)
         txtGoldPoints = findViewById(R.id.txt_game_goldpoints)
+
+        util = Util(this)
     }
 
     private fun configureViewModel(slug: String){
@@ -109,8 +115,8 @@ class GameActivity : AppCompatActivity() {
         txtGameTitle.text = gameReceived.title
         txtGamePrice.text = gameReceived.priceInfo?.currentPrice
 
-        txtGameReleaseDate.text = getString(R.string.release_date, gameReceived.releaseDate)
-        Util.boldDescriptionText(txtGameReleaseDate)
+        txtGameReleaseDate.text = getString(R.string.release_date, util.nullToNoInfo(gameReceived.releaseDate))
+        util.boldDescriptionText(txtGameReleaseDate)
 
         if(gameReceived.hasDemo){
             txtGameHasDemo.text = getString(R.string.has_demo, getString(R.string.yes))
@@ -118,16 +124,18 @@ class GameActivity : AppCompatActivity() {
             txtGameHasDemo.text = getString(R.string.has_demo, getString(R.string.no))
         }
 
-        Util.boldDescriptionText(txtGameHasDemo)
+        util.boldDescriptionText(txtGameHasDemo)
 
-        txtGameSize.text = getString(R.string.game_size, Util.gameSizeReadable(gameReceived.size))
-        Util.boldDescriptionText(txtGameSize)
+        txtGameSize.text = getString(R.string.game_size, util.gameSizeReadable(gameReceived.size))
+        util.boldDescriptionText(txtGameSize)
 
-        txtGamePublishers.text = getString(R.string.publishers, gameReceived.publishers?.get(0)?.name)
-        Util.boldDescriptionText(txtGamePublishers)
+        txtGamePublishers.text = getString(R.string.publishers,
+            util.nullToNoInfo(gameReceived.publishers?.get(0)?.name))
+        util.boldDescriptionText(txtGamePublishers)
 
-        txtNumberOfPlayers.text = getString(R.string.number_of_players, gameReceived.numberOfPlayers)
-        Util.boldDescriptionText(txtNumberOfPlayers)
+        txtNumberOfPlayers.text = getString(R.string.number_of_players,
+            util.nullToNoInfo(gameReceived.numberOfPlayers))
+        util.boldDescriptionText(txtNumberOfPlayers)
 
 
         if(gameReceived.priceInfo?.physicalRelease == true){
@@ -136,25 +144,26 @@ class GameActivity : AppCompatActivity() {
             txtHasPhysicalEdition.text = getString(R.string.physical_media, getString(R.string.no))
         }
 
-        Util.boldDescriptionText(txtHasPhysicalEdition)
+        util.boldDescriptionText(txtHasPhysicalEdition)
 
-        txtBestPrice.text = getString(R.string.best_price, gameReceived.priceInfo?.currentPrice)
-        Util.boldDescriptionText(txtBestPrice)
+        txtBestPrice.text = getString(R.string.best_price, util.nullToNoInfo(gameReceived.priceInfo?.currentPrice))
+        util.boldDescriptionText(txtBestPrice)
 
-        txtCountry.text = getString(R.string.country, gameReceived.priceInfo?.country?.name)
-        Util.boldDescriptionText(txtCountry)
+        txtCountry.text = getString(R.string.country,
+            util.nullToNoInfo(gameReceived.priceInfo?.country?.name))
+        util.boldDescriptionText(txtCountry)
 
-        txtStatus.text = getString(R.string.game_status, gameReceived.priceInfo?.status)
-        Util.boldDescriptionText(txtStatus)
+        txtStatus.text = getString(R.string.game_status, util.nullToNoInfo(gameReceived.priceInfo?.status))
+        util.boldDescriptionText(txtStatus)
 
-        txtGoldPoints.text = getString(R.string.gold_points, gameReceived.priceInfo?.goldPoints?.toString())
-        Util.boldDescriptionText(txtGoldPoints)
+        txtGoldPoints.text = getString(R.string.gold_points,
+            util.nullToNoInfo(gameReceived.priceInfo?.goldPoints?.toString()))
+        util.boldDescriptionText(txtGoldPoints)
 
         buttonDescription.setOnClickListener { showDescription(gameReceived) }
         buttonCategories.setOnClickListener { showCategories(gameReceived) }
         buttonLanguages.setOnClickListener { showLanguages(gameReceived) }
-        buttonSeeTrailer.setOnClickListener {  }
-        //TODO call youtube
+        buttonSeeTrailer.setOnClickListener { showYoutubeTrailer(gameReceived) }
     }
 
     private fun showLanguages(gameReceived: SingleGameRequestInfo){
@@ -169,7 +178,7 @@ class GameActivity : AppCompatActivity() {
         }
 
         val final = stringBuilder.toString().replace(", %#", "")
-        Util.showSimpleAlert(this, final)
+        util.showSimpleAlert(final)
     }
 
     private fun showCategories(gameReceived: SingleGameRequestInfo){
@@ -181,10 +190,20 @@ class GameActivity : AppCompatActivity() {
         var final = stringBuilder.toString().replace("[", "")
         final = final.replace("],", "")
 
-        Util.showSimpleAlert(this, final)
+        util.showSimpleAlert(final)
     }
 
     private fun showDescription(gameReceived: SingleGameRequestInfo){
-        Util.showSimpleAlert(this, gameReceived.description)
+        util.showSimpleAlert(util.nullToNoInfo(gameReceived.description))
+    }
+
+    private fun showYoutubeTrailer(gameReceived: SingleGameRequestInfo) {
+        val videoId = gameReceived.youtubeId
+        if(videoId != null) {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(Url.youtubeId().plus(videoId)))
+            intent.putExtra("VIDEO_ID", videoId)
+            startActivity(intent)
+        }
+
     }
 }

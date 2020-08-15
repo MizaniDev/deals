@@ -20,7 +20,7 @@ data class SingleGameRequestInfo(
     @SerializedName("size")
     val size: Long,
     @SerializedName("youtubeId")
-    val youtubeId: String,
+    val youtubeId: String?,
     @SerializedName("publishers")
     val publishers: List<SingleGameRequestPublishers>?,
     @SerializedName("languages")

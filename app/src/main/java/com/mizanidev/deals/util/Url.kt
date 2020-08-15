@@ -21,6 +21,10 @@ class Url {
         fun instagramApp(): String {
             return "https://instagram.com/_u/giovannasoaresmkt"
         }
+
+        fun youtubeId(): String {
+            return "vnd.youtube:"
+        }
     }
 
 }

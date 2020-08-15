@@ -40,5 +40,6 @@
     <string name="yes">Sim</string>
     <string name="no">Não</string>
     <string name="fechar">Fechar</string>
+    <string name="no_info">Sem Informações</string>
 
 </resources>

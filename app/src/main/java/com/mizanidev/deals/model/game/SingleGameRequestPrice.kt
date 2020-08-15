@@ -11,7 +11,7 @@ data class SingleGameRequestPrice(
     @SerializedName("status")
     val status: String,
     @SerializedName("goldPoints")
-    val goldPoints: Int,
+    val goldPoints: Int = 0,
     @SerializedName("physical_release")
     val physicalRelease: Boolean,
     @SerializedName("country")

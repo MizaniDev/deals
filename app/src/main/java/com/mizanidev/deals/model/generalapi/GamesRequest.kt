@@ -6,5 +6,5 @@ data class GamesRequest(
     @SerializedName("links")
     val links: Links?,
     @SerializedName("data")
-    val gameLists: List<GamesList>
+    val gameLists: ArrayList<GamesList?>
 )

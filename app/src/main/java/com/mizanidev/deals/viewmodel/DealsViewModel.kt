@@ -39,96 +39,65 @@ class DealsViewModel(private val context: Context) : BaseViewModel(){
     }
 
     fun requestRecentReleases(currency: String, locale: String, platform: String){
-        viewState.value = ViewState.Loading
-        scope.launch{
-            try {
-                val requestInteractor = Request()
-                val request = requestInteractor.requestRecentReleases(currency, locale, platform)
-
-                request.enqueue(object: Callback<GamesRequest>{
-                    override fun onFailure(call: Call<GamesRequest>, t: Throwable) {
-                        viewState.value = ViewState.RequestError
-                        viewState.value = ViewState.Loaded
-                        viewState.value = ViewState.Idle
-                    }
-
-                    override fun onResponse(call: Call<GamesRequest>, response: Response<GamesRequest>) {
-                        val gameRequest = response.body()
-                        viewState.value = ViewState.Loaded
-                        viewState.value = ViewState.ShowRecentReleases(gameRequest!!.gameLists)
-                        viewState.value = ViewState.Idle
-                    }
-
-                })
-            }catch (exception: Exception){
-                Log.e("REQUESTERROR", exception.message)
-                viewState.value = ViewState.RequestError
-                viewState.value = ViewState.Loaded
-                viewState.value = ViewState.Idle
-            }
-        }
+//        viewState.value = ViewState.Loading
+//        scope.launch{
+//            try {
+//                val requestInteractor = Request()
+//                val request = requestInteractor.requestRecentReleases(currency, locale, platform)
+//
+//                request.enqueue(object: Callback<GamesRequest>{
+//                    override fun onFailure(call: Call<GamesRequest>, t: Throwable) {
+//                        viewState.value = ViewState.RequestError
+//                        viewState.value = ViewState.Loaded
+//                        viewState.value = ViewState.Idle
+//                    }
+//
+//                    override fun onResponse(call: Call<GamesRequest>, response: Response<GamesRequest>) {
+//                        val gameRequest = response.body()
+//                        viewState.value = ViewState.Loaded
+//                        viewState.value = ViewState.ShowRecentReleases(gameRequest!!.gameLists)
+//                        viewState.value = ViewState.Idle
+//                    }
+//
+//                })
+//            }catch (exception: Exception){
+//                Log.e("REQUESTERROR", exception.message)
+//                viewState.value = ViewState.RequestError
+//                viewState.value = ViewState.Loaded
+//                viewState.value = ViewState.Idle
+//            }
+//        }
     }
-
-    fun requestGamesOnSale(currency: String, locale: String, platform: String){
-        viewState.value = ViewState.Loading
-        scope.launch{
-            try {
-                val requestInteractor = Request()
-                val request = requestInteractor.requestOnSale(currency, locale, platform)
-
-                request.enqueue(object: Callback<GamesRequest>{
-                    override fun onFailure(call: Call<GamesRequest>, t: Throwable) {
-                        viewState.value = ViewState.RequestError
-                        viewState.value = ViewState.Loaded
-                        viewState.value = ViewState.Idle
-                    }
-
-                    override fun onResponse(call: Call<GamesRequest>, response: Response<GamesRequest>) {
-                        val gameRequest = response.body()
-                        viewState.value = ViewState.Loaded
-                        viewState.value = ViewState.ShowOnSale(gameRequest!!.gameLists)
-                        viewState.value = ViewState.Idle
-                    }
-
-                })
-            }catch (exception: Exception){
-                Log.e("REQUESTERROR", exception.message)
-                viewState.value = ViewState.RequestError
-                viewState.value = ViewState.Loaded
-                viewState.value = ViewState.Idle
-            }
-        }
-    }
-
+//
     fun requestSoonGames(currency: String, locale: String, platform: String){
-        viewState.value = ViewState.Loading
-        scope.launch{
-            try {
-                val requestInteractor = Request()
-                val request = requestInteractor.requestSoonGames(currency, locale, platform)
-
-                request.enqueue(object: Callback<GamesRequest>{
-                    override fun onFailure(call: Call<GamesRequest>, t: Throwable) {
-                        viewState.value = ViewState.RequestError
-                        viewState.value = ViewState.Loaded
-                        viewState.value = ViewState.Idle
-                    }
-
-                    override fun onResponse(call: Call<GamesRequest>, response: Response<GamesRequest>) {
-                        val gameRequest = response.body()
-                        viewState.value = ViewState.Loaded
-                        viewState.value = ViewState.ShowOnSale(gameRequest!!.gameLists)
-                        viewState.value = ViewState.Idle
-                    }
-
-                })
-            }catch (exception: Exception){
-                Log.e("REQUESTERROR", exception.message)
-                viewState.value = ViewState.RequestError
-                viewState.value = ViewState.Loaded
-                viewState.value = ViewState.Idle
-            }
-        }
+//        viewState.value = ViewState.Loading
+//        scope.launch{
+//            try {
+//                val requestInteractor = Request()
+//                val request = requestInteractor.requestSoonGames(currency, locale, platform)
+//
+//                request.enqueue(object: Callback<GamesRequest>{
+//                    override fun onFailure(call: Call<GamesRequest>, t: Throwable) {
+//                        viewState.value = ViewState.RequestError
+//                        viewState.value = ViewState.Loaded
+//                        viewState.value = ViewState.Idle
+//                    }
+//
+//                    override fun onResponse(call: Call<GamesRequest>, response: Response<GamesRequest>) {
+//                        val gameRequest = response.body()
+//                        viewState.value = ViewState.Loaded
+//                        viewState.value = ViewState.ShowOnSale(gameRequest!!.gameLists)
+//                        viewState.value = ViewState.Idle
+//                    }
+//
+//                })
+//            }catch (exception: Exception){
+//                Log.e("REQUESTERROR", exception.message)
+//                viewState.value = ViewState.RequestError
+//                viewState.value = ViewState.Loaded
+//                viewState.value = ViewState.Idle
+//            }
+//        }
     }
 
     fun requestGame(title: String){

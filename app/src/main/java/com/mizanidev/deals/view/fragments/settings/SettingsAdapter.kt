@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mizanidev.deals.R
 import com.mizanidev.deals.model.utils.Settings
-import com.mizanidev.deals.view.fragments.RecyclerViewSettingsListener
+import com.mizanidev.deals.util.recyclerview.RecyclerViewSettingsListener
 import kotlinx.android.synthetic.main.settings_row_string.view.*
 
 class SettingsAdapter(private val context: Context, private val settings: List<Settings>,

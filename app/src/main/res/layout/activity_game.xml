@@ -17,8 +17,8 @@
 				android:layout_height="wrap_content">
 
 			<ProgressBar
-					android:layout_width="55dp"
-					android:layout_height="55dp"
+					android:layout_width="@dimen/size_55dp"
+					android:layout_height="@dimen/size_55dp"
 					android:indeterminate="true"/>
 
 		</LinearLayout>
@@ -31,7 +31,7 @@
 
 		<LinearLayout
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:orientation="vertical">
 
 			<LinearLayout
@@ -42,10 +42,9 @@
 
 				<ImageView
 						android:id="@+id/img_game_image"
-						android:layout_width="200dp"
-						android:layout_height="200dp"
-						android:layout_marginTop="20dp"
-						android:src="@drawable/dk"/>
+						android:layout_width="@dimen/size_200dp"
+						android:layout_height="@dimen/size_200dp"
+						android:layout_marginTop="@dimen/size_20dp"/>
 
 				<TextView
 						android:id="@+id/txt_game_title"
@@ -53,31 +52,29 @@
 						android:layout_height="wrap_content"
 						android:gravity="center_horizontal"
 						android:textStyle="bold"
-						android:textSize="24sp"
-						android:layout_marginTop="10dp"
-						android:text="Donkey Kong Country: Tropical Freeze"/>
+						android:textSize="@dimen/size_24sp"
+						android:layout_marginTop="@dimen/size_10dp"/>
 
 				<LinearLayout
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:gravity="center"
-						android:layout_marginTop="10dp"
+						android:layout_marginTop="@dimen/size_10dp"
 						android:orientation="horizontal">
 
 					<ImageView
 							android:id="@+id/img_game_platform_logo"
-							android:layout_width="35dp"
-							android:layout_height="35dp"
-							android:layout_marginEnd="10dp"
+							android:layout_width="@dimen/size_35dp"
+							android:layout_height="@dimen/size_35dp"
+							android:layout_marginEnd="@dimen/size_10dp"
 							android:src="@drawable/nintendo"/>
 
 					<TextView
 							android:id="@+id/txt_game_price"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:textSize="18sp"
-							android:textStyle="bold"
-							android:text="BRL 150,00"/>
+							android:textSize="@dimen/size_18sp"
+							android:textStyle="bold"/>
 
 				</LinearLayout>
 
@@ -87,9 +84,9 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:orientation="vertical"
-				android:layout_marginLeft="10dp"
-				android:layout_marginRight="10dp"
-				android:layout_marginTop="35dp">
+				android:layout_marginLeft="@dimen/size_10dp"
+				android:layout_marginRight="@dimen/size_10dp"
+				android:layout_marginTop="@dimen/size_35dp">
 
 				<TextView
 					android:layout_width="match_parent"
@@ -97,30 +94,30 @@
 					android:text="@string/information"
 					android:textStyle="bold"
 					android:gravity="center_horizontal"
-					android:layout_marginBottom="15dp"
-					android:textSize="24sp"/>
+					android:layout_marginBottom="@dimen/size_15dp"
+					android:textSize="@dimen/size_24sp"/>
 
 				<TextView
 					android:id="@+id/txt_game_releasedate"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:textSize="16sp"
-					android:layout_marginBottom="5dp"
+					android:textSize="@dimen/size_16sp"
+					android:layout_marginBottom="@dimen/size_5dp"
 					android:text="@string/release_date"/>
 
 				<TextView
 					android:id="@+id/txt_game_hasdemo"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:textSize="16sp"
-					android:layout_marginBottom="5dp"
+					android:textSize="@dimen/size_16sp"
+					android:layout_marginBottom="@dimen/size_5dp"
 					android:text="@string/has_demo"/>
 
 				<TextView
 					android:id="@+id/txt_game_size"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:textSize="16sp"
+					android:textSize="@dimen/size_16sp"
 					android:layout_marginBottom="5dp"
 					android:text="@string/game_size"/>
 
@@ -128,31 +125,31 @@
 						android:id="@+id/txt_game_publisher"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:textSize="16sp"
-						android:layout_marginBottom="5dp"
+						android:textSize="@dimen/size_16sp"
+						android:layout_marginBottom="@dimen/size_5dp"
 						android:text="@string/publishers"/>
 
 				<TextView
 						android:id="@+id/txt_game_players"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:textSize="16sp"
-						android:layout_marginBottom="5dp"
+						android:textSize="@dimen/size_16sp"
+						android:layout_marginBottom="@dimen/size_5dp"
 						android:text="@string/number_of_players"/>
 
 				<TextView
 						android:id="@+id/txt_game_physical"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:textSize="16sp"
-						android:layout_marginBottom="5dp"
+						android:textSize="@dimen/size_16sp"
+						android:layout_marginBottom="@dimen/size_5dp"
 						android:text="@string/physical_media"/>
 
 				<LinearLayout
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:gravity="center_horizontal"
-						android:layout_marginTop="35dp"
+						android:layout_marginTop="@dimen/size_35dp"
 						android:orientation="horizontal">
 
 					<Button
@@ -160,8 +157,8 @@
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
 							android:layout_weight="1"
-							android:textSize="16sp"
-							android:layout_marginBottom="5dp"
+							android:textSize="@dimen/size_16sp"
+							android:layout_marginBottom="@dimen/size_5dp"
 							style="@style/Widget.AppCompat.Button.Borderless.Colored"
 							android:text="@string/language"/>
 
@@ -169,9 +166,9 @@
 							android:id="@+id/button_game_categories"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
-							android:textSize="16sp"
+							android:textSize="@dimen/size_16sp"
 							android:layout_weight="1"
-							android:layout_marginBottom="5dp"
+							android:layout_marginBottom="@dimen/size_5dp"
 							style="@style/Widget.AppCompat.Button.Borderless.Colored"
 							android:text="@string/categories"/>
 
@@ -180,8 +177,8 @@
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
 							android:layout_weight="1"
-							android:textSize="16sp"
-							android:layout_marginBottom="5dp"
+							android:textSize="@dimen/size_16sp"
+							android:layout_marginBottom="@dimen/size_5dp"
 							style="@style/Widget.AppCompat.Button.Borderless.Colored"
 							android:text="@string/description"/>
 
@@ -193,9 +190,9 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:orientation="vertical"
-				android:layout_marginLeft="10dp"
-				android:layout_marginRight="10dp"
-				android:layout_marginTop="35dp">
+				android:layout_marginLeft="@dimen/size_10dp"
+				android:layout_marginRight="@dimen/size_10dp"
+				android:layout_marginTop="@dimen/size_35dp">
 
 				<TextView
 						android:layout_width="match_parent"
@@ -203,47 +200,49 @@
 						android:text="@string/prices"
 						android:textStyle="bold"
 						android:gravity="center_horizontal"
-						android:layout_marginBottom="15dp"
-						android:textSize="24sp"/>
+						android:layout_marginBottom="@dimen/size_15dp"
+						android:textSize="@dimen/size_24sp"/>
 
 				<TextView
 						android:id="@+id/txt_game_bestprice"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:textSize="16sp"
-						android:layout_marginBottom="5dp"
+						android:textSize="@dimen/size_16sp"
+						android:layout_marginBottom="@dimen/size_5dp"
 						android:text="@string/best_price"/>
 
 				<TextView
 						android:id="@+id/txt_game_country"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:textSize="16sp"
-						android:layout_marginBottom="5dp"
+						android:textSize="@dimen/size_16sp"
+						android:layout_marginBottom="@dimen/size_5dp"
 						android:text="@string/country"/>
 
 				<TextView
 						android:id="@+id/txt_game_status"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:textSize="16sp"
-						android:layout_marginBottom="5dp"
+						android:textSize="@dimen/size_16sp"
+						android:layout_marginBottom="@dimen/size_5dp"
 						android:text="@string/game_status"/>
 
 				<TextView
 						android:id="@+id/txt_game_goldpoints"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:textSize="16sp"
-						android:layout_marginBottom="5dp"
+						android:textSize="@dimen/size_16sp"
+						android:layout_marginBottom="@dimen/size_5dp"
 						android:text="@string/gold_points"/>
 
 				<Button
 						android:id="@+id/button_game_trailer"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginTop="35dp"
-						android:layout_marginBottom="20dp"
+						android:background="@drawable/youtube_button_selector"
+						android:textColor="@color/white"
+						android:layout_marginTop="@dimen/size_35dp"
+						android:layout_marginBottom="@dimen/size_20dp"
 						android:text="@string/see_trailer"/>
 
 			</LinearLayout>

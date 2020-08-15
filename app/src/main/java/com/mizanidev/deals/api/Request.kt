@@ -89,4 +89,39 @@ class Request{
 
     }
 
+    fun requestMoreGames(nextPage: String, context: Context): Call<GamesRequest> {
+        val retrofitClient = retrofitInstance()
+        val endpoint = retrofitClient.create(NintendoEndpoint::class.java)
+
+        val linkToCall = nextPage.replace(Url.baseUrl(), "")
+            .replace("%5B", "[")
+            .replace("%5D", "]")
+
+        val pageNumber = linkToCall.substring(linkToCall.indexOf("[number]=") + 9,
+            linkToCall.indexOf("&page[size]"))
+        val pageSize = linkToCall.substring(linkToCall.indexOf("[size]=") + 7,
+            linkToCall.length)
+
+        val sharedPreferenceUtil = SharedPreferenceUtil(context)
+
+        val data: MutableMap<String, String> = HashMap()
+
+        if(sharedPreferenceUtil.stringConfig(SharedPreferenceConstants.CURRENCY).isEmpty()) {
+            data["currency"] = "USD"
+        } else {
+            data["currency"] = sharedPreferenceUtil.stringConfig(SharedPreferenceConstants.CURRENCY)
+        }
+
+        if(sharedPreferenceUtil.stringConfig(SharedPreferenceConstants.REGION).isEmpty()) {
+            data["locale"] = "en"
+        } else {
+            data["locale"] = sharedPreferenceUtil.stringConfig(SharedPreferenceConstants.REGION)
+        }
+
+        data["page[number]"] = pageNumber
+        data["page[size]"] = pageSize
+
+        return endpoint.showMoreGames(data)
+    }
+
 }

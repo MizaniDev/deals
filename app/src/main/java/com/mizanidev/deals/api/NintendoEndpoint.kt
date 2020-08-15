@@ -21,4 +21,6 @@ interface NintendoEndpoint {
     fun soonGames(@QueryMap query: Map<String, String>, @Query("filter[coming_soon]") recentRelease: Boolean): Call<GamesRequest>
     @GET("currencies")
     fun currencies() : Call<CurrencyData>
+    @GET("games?")
+    fun showMoreGames(@QueryMap query: Map<String, String>): Call<GamesRequest>
 }
