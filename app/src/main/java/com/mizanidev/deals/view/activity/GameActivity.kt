@@ -129,14 +129,19 @@ class GameActivity : AppCompatActivity() {
         txtGameSize.text = getString(R.string.game_size, util.gameSizeReadable(gameReceived.size))
         util.boldDescriptionText(txtGameSize)
 
-        txtGamePublishers.text = getString(R.string.publishers,
-            util.nullToNoInfo(gameReceived.publishers?.get(0)?.name))
-        util.boldDescriptionText(txtGamePublishers)
+        try {
+            txtGamePublishers.text = getString(R.string.publishers,
+                util.nullToNoInfo(gameReceived.publishers?.get(0)?.name))
+            util.boldDescriptionText(txtGamePublishers)
+        } catch (exception: Exception) {
+            txtGamePublishers.text = getString(R.string.publishers,
+                util.nullToNoInfo(null))
+            util.boldDescriptionText(txtGamePublishers)
+        }
 
         txtNumberOfPlayers.text = getString(R.string.number_of_players,
             util.nullToNoInfo(gameReceived.numberOfPlayers))
         util.boldDescriptionText(txtNumberOfPlayers)
-
 
         if(gameReceived.priceInfo?.physicalRelease == true){
             txtHasPhysicalEdition.text = getString(R.string.physical_media, getString(R.string.yes))

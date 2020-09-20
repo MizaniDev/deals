@@ -1,5 +1,6 @@
 package com.mizanidev.deals.modules
 
+import com.google.firebase.database.FirebaseDatabase
 import com.mizanidev.deals.view.fragments.onsale.viewmodel.OnSaleViewModel
 import com.mizanidev.deals.view.fragments.releases.viewmodel.ReleasesViewModel
 import com.mizanidev.deals.view.fragments.soon.viewmodel.SoonViewModel
@@ -9,9 +10,15 @@ import org.koin.dsl.module
 
 val mainModule = module {
 
-    viewModel {
-        DealsViewModel(get())
+    factory {
+        val fb = FirebaseDatabase.getInstance()
+        fb.reference
     }
+
+    viewModel {
+        DealsViewModel(context = get(), dbRef = get())
+    }
+
 
     viewModel { OnSaleViewModel() }
     viewModel { ReleasesViewModel() }

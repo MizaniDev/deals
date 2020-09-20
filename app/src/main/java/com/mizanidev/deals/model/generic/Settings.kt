@@ -1,4 +1,4 @@
-package com.mizanidev.deals.model.utils
+package com.mizanidev.deals.model.generic
 
 import com.mizanidev.deals.R
 

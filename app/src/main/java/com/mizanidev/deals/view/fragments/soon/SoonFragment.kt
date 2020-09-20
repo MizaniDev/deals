@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mizanidev.deals.R
 import com.mizanidev.deals.model.generalapi.GamesList
 import com.mizanidev.deals.model.generalapi.GamesRequest
+import com.mizanidev.deals.util.CToast
 import com.mizanidev.deals.util.SharedPreferenceConstants
 import com.mizanidev.deals.util.recyclerview.OnLoadMoreListener
 import com.mizanidev.deals.util.recyclerview.RecyclerViewLoadMoreScroll
@@ -81,7 +82,12 @@ class SoonFragment : BaseFragment() {
         recyclerView.visibility = View.VISIBLE
     }
 
-    private fun showList(list: GamesRequest?){
+    private fun showList(list: GamesRequest?) {
+        if(list!!.gameLists.isEmpty()) {
+            val cToast = CToast(requireContext())
+            cToast.showInfo(getString(R.string.no_results))
+        }
+
         adapter = HomeActivityAdapter(requireContext(), list!!.gameLists)
         adapter.notifyDataSetChanged()
         recyclerView.adapter = adapter

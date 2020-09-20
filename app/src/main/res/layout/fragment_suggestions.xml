@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginLeft="@dimen/size_10dp"
+              android:layout_marginRight="@dimen/size_10dp">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:layout_marginBottom="@dimen/size_20dp"
+            android:text="@string/suggestion_desc"/>
+
+    <EditText
+            android:id="@+id/edit_type_email"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_48dp"
+            android:background="@drawable/edittext_selector"
+            android:paddingLeft="@dimen/size_10dp"
+            android:hint="@string/your_email"
+            android:lines="1"
+            android:inputType="textEmailAddress"
+            android:layout_marginBottom="@dimen/size_10dp"/>
+
+    <EditText
+            android:id="@+id/edit_suggestion"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_150dp"
+            android:background="@drawable/edittext_selector"
+            android:hint="@string/your_suggestions"
+            android:padding="@dimen/size_10dp"
+            android:gravity="top|left"
+            android:maxLength="200"
+            android:inputType="textMultiLine"/>
+
+
+</LinearLayout>

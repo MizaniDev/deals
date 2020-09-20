@@ -15,7 +15,8 @@ import com.mizanidev.deals.model.generalapi.GamesList
 import com.mizanidev.deals.util.CountryFlags
 import kotlinx.android.synthetic.main.recycler_view_main_row.view.*
 
-class HomeActivityAdapter(private val context: Context, private var games: ArrayList<GamesList?>) :
+class HomeActivityAdapter(private val context: Context,
+                          private var games: ArrayList<GamesList?>) :
     RecyclerView.Adapter<HomeActivityAdapter.ItemViewHolder>(){
 
     class ItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -47,9 +48,10 @@ class HomeActivityAdapter(private val context: Context, private var games: Array
                     .override(80, 80)
                     .into(holder.image)
 
+
                 if(game.priceInfo?.hasDiscount == true) {
                     holder.discountPrice.text = game.priceInfo.discountPrice?.discountPrice
-                    holder.percent.text = game.priceInfo.discountPrice?.percentOff?.toString() + "% OFF"
+                    holder.percent.text = game.priceInfo.discountPrice?.percentOff?.toString().plus("% OFF")
 
                     val spannable = SpannableString(game.priceInfo.regularPrice?.regularPrice)
                     game.priceInfo.regularPrice?.regularPrice?.length?.let { it1 ->
@@ -65,9 +67,9 @@ class HomeActivityAdapter(private val context: Context, private var games: Array
                 }
 
                 holder.itemView.setOnClickListener {
-                    var intent = Intent(context, GameActivity::class.java)
+                    val intent = Intent(context, GameActivity::class.java)
                     intent.putExtra("slug", game.slug)
-                    context?.startActivity(intent)
+                    context.startActivity(intent)
                 }
             }
     }

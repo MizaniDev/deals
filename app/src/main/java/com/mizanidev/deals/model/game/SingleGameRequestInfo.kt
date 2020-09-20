@@ -8,7 +8,7 @@ data class SingleGameRequestInfo(
     @SerializedName("title")
     val title: String,
     @SerializedName("imageUrl")
-    val imageUrl: String,
+    val imageUrl: String?,
     @SerializedName("releaseDate")
     val releaseDate: String,
     @SerializedName("description")

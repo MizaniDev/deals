@@ -5,13 +5,20 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import com.mizanidev.deals.R
 import com.mizanidev.deals.api.Request
+import com.mizanidev.deals.model.feedback.Suggestions
 import com.mizanidev.deals.model.game.SingleGameRequest
-import com.mizanidev.deals.model.generalapi.GamesRequest
 import com.mizanidev.deals.model.others.CurrencyData
-import com.mizanidev.deals.model.utils.Settings
-import com.mizanidev.deals.model.utils.SettingsIds
+import com.mizanidev.deals.model.generic.Settings
+import com.mizanidev.deals.model.generic.SettingsIds
+import com.mizanidev.deals.util.CToast
 import com.mizanidev.deals.util.Url
+import com.mizanidev.deals.util.Util
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -20,84 +27,24 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.lang.Exception
 
-class DealsViewModel(private val context: Context) : BaseViewModel(){
+class DealsViewModel(private val context: Context,
+                     private val dbRef: DatabaseReference) : BaseViewModel(){
     val viewState = MutableLiveData<ViewState>()
     private val scope = CoroutineScope(Job())
+    private val util = Util(context)
 
     fun configureSettings(setting: Settings){
         when (setting.idSettings) {
             SettingsIds.ID_REGION -> selectRegion()
             SettingsIds.ID_CURRENCY -> selectCurrency()
             SettingsIds.ID_TRANSLATE -> helpWithTranslation()
-            SettingsIds.ID_SUGGESTIONS -> sendSuggestions()
+            SettingsIds.ID_SUGGESTIONS -> validateSuggestions()
             SettingsIds.ID_BUGS -> showBugs()
             SettingsIds.ID_TWITTER -> navigateTwitter()
             SettingsIds.ID_INSTAGRAM -> navigateInstagram()
             SettingsIds.ID_RATE -> rateApp()
         }
 
-    }
-
-    fun requestRecentReleases(currency: String, locale: String, platform: String){
-//        viewState.value = ViewState.Loading
-//        scope.launch{
-//            try {
-//                val requestInteractor = Request()
-//                val request = requestInteractor.requestRecentReleases(currency, locale, platform)
-//
-//                request.enqueue(object: Callback<GamesRequest>{
-//                    override fun onFailure(call: Call<GamesRequest>, t: Throwable) {
-//                        viewState.value = ViewState.RequestError
-//                        viewState.value = ViewState.Loaded
-//                        viewState.value = ViewState.Idle
-//                    }
-//
-//                    override fun onResponse(call: Call<GamesRequest>, response: Response<GamesRequest>) {
-//                        val gameRequest = response.body()
-//                        viewState.value = ViewState.Loaded
-//                        viewState.value = ViewState.ShowRecentReleases(gameRequest!!.gameLists)
-//                        viewState.value = ViewState.Idle
-//                    }
-//
-//                })
-//            }catch (exception: Exception){
-//                Log.e("REQUESTERROR", exception.message)
-//                viewState.value = ViewState.RequestError
-//                viewState.value = ViewState.Loaded
-//                viewState.value = ViewState.Idle
-//            }
-//        }
-    }
-//
-    fun requestSoonGames(currency: String, locale: String, platform: String){
-//        viewState.value = ViewState.Loading
-//        scope.launch{
-//            try {
-//                val requestInteractor = Request()
-//                val request = requestInteractor.requestSoonGames(currency, locale, platform)
-//
-//                request.enqueue(object: Callback<GamesRequest>{
-//                    override fun onFailure(call: Call<GamesRequest>, t: Throwable) {
-//                        viewState.value = ViewState.RequestError
-//                        viewState.value = ViewState.Loaded
-//                        viewState.value = ViewState.Idle
-//                    }
-//
-//                    override fun onResponse(call: Call<GamesRequest>, response: Response<GamesRequest>) {
-//                        val gameRequest = response.body()
-//                        viewState.value = ViewState.Loaded
-//                        viewState.value = ViewState.ShowOnSale(gameRequest!!.gameLists)
-//                        viewState.value = ViewState.Idle
-//                    }
-//
-//                })
-//            }catch (exception: Exception){
-//                Log.e("REQUESTERROR", exception.message)
-//                viewState.value = ViewState.RequestError
-//                viewState.value = ViewState.Loaded
-//                viewState.value = ViewState.Idle
-//            }
-//        }
     }
 
     fun requestGame(title: String){
@@ -159,11 +106,35 @@ class DealsViewModel(private val context: Context) : BaseViewModel(){
     }
 
     private fun helpWithTranslation(){
-
+        val cToast = CToast(context)
+        cToast.showInfo(context.getString(R.string.soon_feature))
     }
 
-    private fun sendSuggestions(){
+    private fun validateSuggestions() {
+        dbRef.child("suggestions")
+            .child(util.userID())
+            .addListenerForSingleValueEvent(object : ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {}
+                override fun onDataChange(p0: DataSnapshot) {
+                    if(p0.childrenCount >= 3) {
+                        viewState.value = ViewState.SuggestionError
+                    } else {
+                        viewState.value = ViewState.ShowSuggestionAlert
+                    }
+                }
+            })
 
+        viewState.value = ViewState.Idle
+    }
+
+    fun sendSuggestion(suggestion: Suggestions) {
+        dbRef.child("suggestions")
+            .child(suggestion.idUsuario)
+            .push()
+            .setValue(suggestion)
+
+        viewState.value = ViewState.SuggestionSent
+        viewState.value = ViewState.Idle
     }
 
     private fun showBugs(){

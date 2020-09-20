@@ -36,4 +36,9 @@ class SharedPreferenceUtil(private val context: Context) {
         editor.remove(key)
         editor.commit()
     }
+
+    fun keyExists(key: String): Boolean {
+        val settings = context.getSharedPreferences(PREFS_NAME, 0)
+        return settings.contains(key)
+    }
 }

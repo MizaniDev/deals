@@ -46,4 +46,8 @@ class Util(val context: Context) {
         return text ?: context.getString(R.string.no_info)
     }
 
+    fun userID() : String{
+        val sharedPreferenceUtil = SharedPreferenceUtil(context)
+        return sharedPreferenceUtil.stringConfig(SharedPreferenceConstants.UUID)
+    }
 }

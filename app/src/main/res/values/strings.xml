@@ -41,5 +41,14 @@
     <string name="no">Não</string>
     <string name="fechar">Fechar</string>
     <string name="no_info">Sem Informações</string>
+    <string name="suggestion_desc">Ficamos felizes em receber sua sugestão!\nVocê pode enviar até 3 sugestões para análise.\n\nUsaremos seu e-mail para responder caso sua sugestão seja aceita.</string>
+    <string name="your_email">informe seu e-mail</string>
+    <string name="your_suggestions">digite sua sugestão</string>
+    <string name="send">enviar</string>
+    <string name="suggestion_sent">Sugestão enviada :)</string>
+    <string name="suggestion_error">Você já atingiu o limite de sugestões</string>
+
+    <string name="soon_feature">Chegando em breve :)</string>
+    <string name="no_results">Sem resultados</string>
 
 </resources>

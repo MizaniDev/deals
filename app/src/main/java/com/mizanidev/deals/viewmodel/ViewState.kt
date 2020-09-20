@@ -7,8 +7,6 @@ import com.mizanidev.deals.model.others.Currency
 
 sealed class ViewState {
     // Settings
-    object SendToTwitter: ViewState()
-    object SendToInstagram: ViewState()
     object RequestError: ViewState()
     object Idle: ViewState()
     object Loading: ViewState()
@@ -23,5 +21,9 @@ sealed class ViewState {
     data class ShowSoonGames(var items: GamesRequest?) : ViewState()
     data class ShowGame(var game: SingleGameRequestInfo) : ViewState()
     data class ShowMoreGames(var items: GamesRequest?): ViewState()
+
+    object ShowSuggestionAlert: ViewState()
+    object SuggestionSent: ViewState()
+    object SuggestionError: ViewState()
 
 }

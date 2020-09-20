@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "783729673524",
+    "firebase_url": "https://eshop-deals.firebaseio.com",
+    "project_id": "eshop-deals",
+    "storage_bucket": "eshop-deals.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783729673524:android:15002623718663888c1161",
+        "android_client_info": {
+          "package_name": "com.mizanidev.deals"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "783729673524-smnrts777drmre3082q310oq8r02uqs4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2vKIpW7qjvVur0pT3Sfx-sYUsM56qTFE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "783729673524-smnrts777drmre3082q310oq8r02uqs4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
