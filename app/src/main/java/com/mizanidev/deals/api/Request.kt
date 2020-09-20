@@ -124,4 +124,30 @@ class Request{
         return endpoint.showMoreGames(data)
     }
 
+    fun requestSearchGame(nameToSearch: String, context: Context): Call<GamesRequest> {
+        val retrofitClient = retrofitInstance()
+        val endpoint = retrofitClient.create(NintendoEndpoint::class.java)
+
+        val data: MutableMap<String, String> = HashMap()
+        data["filter[platform]"] = "nintendo"
+        data["filter[title]"] = nameToSearch
+
+
+        val sharedPreferenceUtil = SharedPreferenceUtil(context)
+
+        if(sharedPreferenceUtil.stringConfig(SharedPreferenceConstants.CURRENCY).isEmpty()) {
+            data["currency"] = "USD"
+        } else {
+            data["currency"] = sharedPreferenceUtil.stringConfig(SharedPreferenceConstants.CURRENCY)
+        }
+
+        if(sharedPreferenceUtil.stringConfig(SharedPreferenceConstants.REGION).isEmpty()) {
+            data["locale"] = "en"
+        } else {
+            data["locale"] = sharedPreferenceUtil.stringConfig(SharedPreferenceConstants.REGION)
+        }
+
+        return endpoint.requestSearchGame(data)
+    }
+
 }

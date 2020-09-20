@@ -26,4 +26,8 @@ sealed class ViewState {
     object SuggestionSent: ViewState()
     object SuggestionError: ViewState()
 
+    //Search
+    object SearchLoading: ViewState()
+    object SearchLoaded: ViewState()
+    data class RefreshSearch(var items: GamesRequest?) : ViewState()
 }

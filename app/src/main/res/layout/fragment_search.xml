@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginLeft="@dimen/size_10dp"
+              android:layout_marginRight="@dimen/size_10dp">
+
+    <EditText
+            android:id="@+id/edit_type_game"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_48dp"
+            android:background="@drawable/edittext_selector"
+            android:paddingLeft="@dimen/size_10dp"
+            android:hint="@string/search_game"
+            android:lines="1"
+            android:inputType="text"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:layout_marginBottom="@dimen/size_10dp"/>
+
+    <ProgressBar
+            android:id="@+id/search_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:layout_marginBottom="@dimen/size_10dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_10dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+</LinearLayout>

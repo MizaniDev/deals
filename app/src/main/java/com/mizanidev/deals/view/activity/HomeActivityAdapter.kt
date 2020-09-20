@@ -16,7 +16,8 @@ import com.mizanidev.deals.util.CountryFlags
 import kotlinx.android.synthetic.main.recycler_view_main_row.view.*
 
 class HomeActivityAdapter(private val context: Context,
-                          private var games: ArrayList<GamesList?>) :
+                          private var games: ArrayList<GamesList?>,
+                          private val fromSearch: Boolean = false) :
     RecyclerView.Adapter<HomeActivityAdapter.ItemViewHolder>(){
 
     class ItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -52,6 +53,9 @@ class HomeActivityAdapter(private val context: Context,
                 if(game.priceInfo?.hasDiscount == true) {
                     holder.discountPrice.text = game.priceInfo.discountPrice?.discountPrice
                     holder.percent.text = game.priceInfo.discountPrice?.percentOff?.toString().plus("% OFF")
+                    if(fromSearch) {
+                        holder.percent.visibility = View.GONE
+                    }
 
                     val spannable = SpannableString(game.priceInfo.regularPrice?.regularPrice)
                     game.priceInfo.regularPrice?.regularPrice?.length?.let { it1 ->

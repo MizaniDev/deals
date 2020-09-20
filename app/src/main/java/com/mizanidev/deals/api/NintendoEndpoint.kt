@@ -23,4 +23,6 @@ interface NintendoEndpoint {
     fun currencies() : Call<CurrencyData>
     @GET("games?")
     fun showMoreGames(@QueryMap query: Map<String, String>): Call<GamesRequest>
+    @GET("games?")
+    fun requestSearchGame(@QueryMap query: Map<String, String>) : Call<GamesRequest>
 }

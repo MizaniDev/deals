@@ -8,6 +8,7 @@ import android.widget.ProgressBar
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.mizanidev.deals.R
 import com.mizanidev.deals.model.generalapi.GamesList
 import com.mizanidev.deals.model.generalapi.GamesRequest
@@ -30,6 +31,7 @@ class ReleasesFragment : BaseFragment() {
     private lateinit var loadMoreItemsCells: ArrayList<GamesList?>
     private lateinit var scrollListener: RecyclerViewLoadMoreScroll
     private lateinit var mLayoutManager: RecyclerView.LayoutManager
+    private lateinit var searchButton: FloatingActionButton
 
     private val viewModel: ReleasesViewModel by viewModel()
 
@@ -48,6 +50,8 @@ class ReleasesFragment : BaseFragment() {
         recyclerView = view.findViewById(R.id.recycler_view)
         loading = view.findViewById(R.id.loading)
         loadingRow = view.findViewById(R.id.loading_row)
+        searchButton = view.findViewById(R.id.floating_action_button)
+        searchButton.setOnClickListener { showSearchGame() }
     }
 
     private fun setObservables(){

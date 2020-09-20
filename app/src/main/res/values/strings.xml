@@ -48,6 +48,9 @@
     <string name="suggestion_sent">Sugestão enviada :)</string>
     <string name="suggestion_error">Você já atingiu o limite de sugestões</string>
 
+    <string name="search_game_title">Buscar jogo</string>
+    <string name="search_game">Digite o nome do jogo</string>
+
     <string name="soon_feature">Chegando em breve :)</string>
     <string name="no_results">Sem resultados</string>
 
