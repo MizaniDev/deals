@@ -3,9 +3,13 @@ package com.mizanidev.deals.viewmodel
 import com.mizanidev.deals.model.game.SingleGameRequestInfo
 import com.mizanidev.deals.model.generalapi.GamesList
 import com.mizanidev.deals.model.generalapi.GamesRequest
+import com.mizanidev.deals.model.generic.KnowsBugs
 import com.mizanidev.deals.model.others.Currency
 
 sealed class ViewState {
+    //Session
+    object UserLogged: ViewState()
+
     // Settings
     object RequestError: ViewState()
     object Idle: ViewState()
@@ -25,9 +29,14 @@ sealed class ViewState {
     object ShowSuggestionAlert: ViewState()
     object SuggestionSent: ViewState()
     object SuggestionError: ViewState()
+    object StartPurchase: ViewState()
 
     //Search
     object SearchLoading: ViewState()
     object SearchLoaded: ViewState()
     data class RefreshSearch(var items: GamesRequest?) : ViewState()
+
+    //Knows Bugs
+    data class ShowBugs(var items: ArrayList<KnowsBugs>) : ViewState()
+    object NoBugs: ViewState()
 }

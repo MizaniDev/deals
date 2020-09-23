@@ -6,9 +6,9 @@
     <string name="deals">Promoções</string>
     <string name="soon">Em Breve</string>
     <string name="settings">Configurações</string>
-    
+
     //Settings
-    <string name="region">Região</string>
+    <string name="remove_ads">Remover Anúncios</string>
     <string name="currency">Moeda</string>
     <string name="translate_app">Traduzir o app</string>
     <string name="suggestions">Sugestões</string>
@@ -53,5 +53,20 @@
 
     <string name="soon_feature">Chegando em breve :)</string>
     <string name="no_results">Sem resultados</string>
+    <string name="title_activity_ad_mob_acitivity">AdMobAcitivity</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="bug_solved_description"><b>%1$s</b>\n%2$s\nCorrigido na versão: %3$s</string>
+    <string name="bug_notsolved_description"><b>%1$s</b>\n%2$s\nAinda não corrigido.</string>
+    <string name="no_bugs_found">Nenhum bug encontrado :)</string>
+
+    <string name="connected_to_server">Conectado ao servidor</string>
+
+    <string name="interstitial_ad_sample">Interstitial Ad Sample</string>
+    <string name="start_level">Level 1</string>
+    <string name="next_level">Next Level</string>
+
+    <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="interstitial_ad_unit_id_prod">cca-app-pub-3559495117114477/7650343479</string>
 
 </resources>

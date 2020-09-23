@@ -9,9 +9,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.billingclient.api.BillingFlowParams
 import com.mizanidev.deals.BuildConfig
 import com.mizanidev.deals.R
 import com.mizanidev.deals.model.feedback.Suggestions
+import com.mizanidev.deals.model.generic.KnowsBugs
 import com.mizanidev.deals.model.others.Currency
 import com.mizanidev.deals.model.generic.Settings
 import com.mizanidev.deals.model.generic.SettingsIds
@@ -106,6 +108,9 @@ class SettingsFragment: BaseFragment(),
                 is ViewState.ShowSuggestionAlert -> showSuggestionAlert()
                 is ViewState.SuggestionError -> suggestionError()
                 is ViewState.SuggestionSent -> suggestionSent()
+                is ViewState.StartPurchase -> startPurchaseFlow()
+                is ViewState.ShowBugs -> showBugs(it.items)
+                is ViewState.NoBugs -> noBugs()
             }
         })
     }
@@ -114,13 +119,15 @@ class SettingsFragment: BaseFragment(),
         when(viewType){
             REGION_VIEW -> {
                 return listOf(
-                    Settings(SettingsIds.ID_REGION, R.drawable.region, getString(R.string.region)),
-
                     Settings(
                         SettingsIds.ID_CURRENCY,
                         R.drawable.currency,
                         getString(R.string.currency),
-                        listener?.sharedPreference()!!.stringConfig(SharedPreferenceConstants.CURRENCY))
+                        listener?.sharedPreference()!!.stringConfig(SharedPreferenceConstants.CURRENCY)),
+
+                    Settings(SettingsIds.ID_PURCHASE,
+                        R.drawable.region,
+                        getString(R.string.remove_ads))
                 )
             }
             HELP_US -> {
@@ -204,5 +211,51 @@ class SettingsFragment: BaseFragment(),
     private fun suggestionSent() {
         val cToast = CToast(requireContext())
         cToast.showSuccess(getString(R.string.suggestion_sent))
+    }
+
+    private fun showBugs(bugs: ArrayList<KnowsBugs>) {
+        val text = StringBuilder()
+        for(bug: KnowsBugs in bugs) {
+            if(bug.solved) {
+                text.append(getString(R.string.bug_solved_description,
+                    bug.title,
+                    bug.description,
+                    bug.versionSolved))
+                text.append('\n')
+                text.append("----------")
+                text.append('\n')
+
+            } else {
+                text.append(getString(R.string.bug_notsolved_description,
+                    bug.title,
+                    bug.description))
+                text.append('\n')
+                text.append("----------")
+                text.append('\n')
+            }
+        }
+
+
+
+        val alertDialog = AlertDialog.Builder(requireContext())
+        alertDialog.setTitle(R.string.known_bugs)
+        alertDialog.setMessage(text.toString())
+        alertDialog.setNeutralButton("ok", null)
+        alertDialog.show()
+    }
+
+    private fun noBugs() {
+        val cToast = CToast(requireContext())
+        cToast.showInfo(getString(R.string.no_bugs_found))
+    }
+
+    private fun startPurchaseFlow() {
+        //TODO implementar sistema de pagamento
+//        val flowParams = BillingFlowParams.newBuilder()
+//            .setSkuDetails(skuDetails)
+//            .build()
+//
+//        val responseCode = billingClient
+//            .launchBillingFlow(activity, flowParams).responseCode
     }
 }

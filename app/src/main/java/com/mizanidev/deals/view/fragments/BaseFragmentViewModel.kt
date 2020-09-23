@@ -3,6 +3,8 @@ package com.mizanidev.deals.view.fragments
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
 import com.mizanidev.deals.api.Request
 import com.mizanidev.deals.model.generalapi.GamesRequest
 import com.mizanidev.deals.viewmodel.BaseViewModel
@@ -15,9 +17,21 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.lang.Exception
 
-class BaseFragmentViewModel : BaseViewModel() {
+class BaseFragmentViewModel(private val auth: FirebaseAuth) : BaseViewModel() {
     val viewState = MutableLiveData<ViewState>()
     private val scope = CoroutineScope(Job())
+
+    fun createUser() {
+        auth.signInAnonymously()
+            .addOnCompleteListener()
+    }
+
+    private fun <TResult> Task<TResult>.addOnCompleteListener() {
+        if(isSuccessful) {
+            viewState.value = ViewState.UserLogged
+            viewState.value = ViewState.Idle
+        }
+    }
 
     fun searchGame(nameToSearch: String, context: Context) {
         viewState.value = ViewState.SearchLoading

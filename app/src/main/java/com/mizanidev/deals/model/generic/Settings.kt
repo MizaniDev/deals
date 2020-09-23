@@ -12,7 +12,7 @@ data class Settings(
 
 class SettingsIds{
     companion object {
-        const val ID_REGION = 1
+        const val ID_PURCHASE = 1
         const val ID_CURRENCY = 2
         const val ID_TRANSLATE = 3
         const val ID_SUGGESTIONS = 4

@@ -5,6 +5,11 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.android.billingclient.api.BillingFlowParams
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -13,6 +18,7 @@ import com.mizanidev.deals.R
 import com.mizanidev.deals.api.Request
 import com.mizanidev.deals.model.feedback.Suggestions
 import com.mizanidev.deals.model.game.SingleGameRequest
+import com.mizanidev.deals.model.generic.KnowsBugs
 import com.mizanidev.deals.model.others.CurrencyData
 import com.mizanidev.deals.model.generic.Settings
 import com.mizanidev.deals.model.generic.SettingsIds
@@ -35,7 +41,7 @@ class DealsViewModel(private val context: Context,
 
     fun configureSettings(setting: Settings){
         when (setting.idSettings) {
-            SettingsIds.ID_REGION -> selectRegion()
+            SettingsIds.ID_PURCHASE -> startPurchase()
             SettingsIds.ID_CURRENCY -> selectCurrency()
             SettingsIds.ID_TRANSLATE -> helpWithTranslation()
             SettingsIds.ID_SUGGESTIONS -> validateSuggestions()
@@ -74,8 +80,9 @@ class DealsViewModel(private val context: Context,
         }
     }
 
-    private fun selectRegion() {
-        //TODO verificar se isso existirá
+    private fun startPurchase() {
+        viewState.value = ViewState.StartPurchase
+        viewState.value = ViewState.Idle
     }
 
     private fun selectCurrency() {
@@ -138,6 +145,28 @@ class DealsViewModel(private val context: Context,
     }
 
     private fun showBugs(){
+        val listBugs = ArrayList<KnowsBugs>()
+
+        dbRef.child("known_bugs")
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    if(!p0.exists()) {
+                        viewState.value = ViewState.NoBugs
+                        viewState.value = ViewState.Idle
+                        return
+                    }
+
+                    for (data: DataSnapshot in p0.children) {
+                        listBugs.add(data.getValue(KnowsBugs::class.java)!!)
+                    }
+
+                    viewState.value = ViewState.ShowBugs(listBugs)
+                    viewState.value = ViewState.Idle
+                }
+            })
 
     }
 
@@ -173,4 +202,6 @@ class DealsViewModel(private val context: Context,
     private fun rateApp(){
 
     }
+
 }
+

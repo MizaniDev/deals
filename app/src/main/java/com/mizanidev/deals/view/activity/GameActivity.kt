@@ -11,6 +11,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.MobileAds
+import com.mizanidev.deals.BuildConfig
 import com.mizanidev.deals.R
 import com.mizanidev.deals.model.game.SingleGameRequestInfo
 import com.mizanidev.deals.util.Url
@@ -44,15 +49,21 @@ class GameActivity : AppCompatActivity() {
     private lateinit var util: Util
     private val viewModel: DealsViewModel by viewModel()
 
+    //Ads
+    private lateinit var mInterstitialAd: InterstitialAd
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
+        MobileAds.initialize(this)
 
         val slug = intent.extras?.get("slug") as String
 
         initComponents()
         configureViewModel(slug)
         setObservables()
+        configAds()
+        showAds()
     }
 
     private fun initComponents(){
@@ -86,7 +97,7 @@ class GameActivity : AppCompatActivity() {
     private fun setObservables(){
         viewModel.viewState.observe(this, Observer {
             when(it){
-                is ViewState.ShowGame -> showGame(it.game!!)
+                is ViewState.ShowGame -> showGame(it.game)
                 is ViewState.Loading -> showLoading()
                 is ViewState.Loaded -> hideLoading()
             }
@@ -211,4 +222,23 @@ class GameActivity : AppCompatActivity() {
         }
 
     }
+
+    private fun configAds() {
+        mInterstitialAd = InterstitialAd(this)
+
+        if(BuildConfig.DEBUG) {
+            mInterstitialAd.adUnitId = getString(R.string.interstitial_ad_unit_id)
+        }else mInterstitialAd.adUnitId = getString(R.string.interstitial_ad_unit_id_prod)
+
+        mInterstitialAd.loadAd(AdRequest.Builder().build())
+    }
+
+    private fun showAds() {
+        mInterstitialAd.adListener = object: AdListener() {
+            override fun onAdLoaded() {
+                mInterstitialAd.show()
+            }
+        }
+    }
+
 }

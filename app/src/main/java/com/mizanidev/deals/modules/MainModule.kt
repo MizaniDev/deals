@@ -1,5 +1,6 @@
 package com.mizanidev.deals.modules
 
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.mizanidev.deals.view.fragments.BaseFragmentViewModel
 import com.mizanidev.deals.view.fragments.onsale.viewmodel.OnSaleViewModel
@@ -16,6 +17,10 @@ val mainModule = module {
         fb.reference
     }
 
+    factory {
+        FirebaseAuth.getInstance()
+    }
+
     viewModel {
         DealsViewModel(context = get(), dbRef = get())
     }
@@ -24,5 +29,8 @@ val mainModule = module {
     viewModel { OnSaleViewModel() }
     viewModel { ReleasesViewModel() }
     viewModel { SoonViewModel() }
-    viewModel { BaseFragmentViewModel() }
+
+    viewModel {
+        BaseFragmentViewModel(auth = get())
+    }
 }

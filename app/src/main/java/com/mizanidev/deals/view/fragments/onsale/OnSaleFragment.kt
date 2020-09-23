@@ -9,7 +9,12 @@ import android.widget.ProgressBar
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.mizanidev.deals.BuildConfig
 import com.mizanidev.deals.R
 import com.mizanidev.deals.model.generalapi.GamesList
 import com.mizanidev.deals.model.generalapi.GamesRequest
@@ -36,15 +41,21 @@ class OnSaleFragment : BaseFragment() {
 
     private val viewModel: OnSaleViewModel by viewModel()
 
+    //Ads
+    private lateinit var mInterstitialAd: InterstitialAd
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.recycler_view_main, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        MobileAds.initialize(requireContext())
         initComponents(view)
         setObservables()
         makeRequest()
+        configAds()
+        showAds()
     }
 
     private fun initComponents(view: View) {
@@ -143,5 +154,23 @@ class OnSaleFragment : BaseFragment() {
 
     companion object {
         var nextPage: String? = null
+    }
+
+    private fun configAds() {
+        mInterstitialAd = InterstitialAd(requireContext())
+
+        if(BuildConfig.DEBUG) {
+            mInterstitialAd.adUnitId = getString(R.string.interstitial_ad_unit_id)
+        }else mInterstitialAd.adUnitId = getString(R.string.interstitial_ad_unit_id_prod)
+
+        mInterstitialAd.loadAd(AdRequest.Builder().build())
+    }
+
+    private fun showAds() {
+        mInterstitialAd.adListener = object: AdListener() {
+            override fun onAdLoaded() {
+                mInterstitialAd.show()
+            }
+        }
     }
 }

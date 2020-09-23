@@ -1,7 +1,9 @@
 package com.mizanidev.deals.view.fragments
 
+import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mizanidev.deals.R
 import com.mizanidev.deals.model.generalapi.GamesRequest
+import com.mizanidev.deals.util.CToast
 import com.mizanidev.deals.util.SharedPreferenceUtil
 import com.mizanidev.deals.view.activity.HomeActivityAdapter
 import com.mizanidev.deals.viewmodel.ViewState
@@ -26,6 +29,17 @@ abstract class BaseFragment : Fragment(), TextWatcher {
     private lateinit var recyclerViewSearch: RecyclerView
     private lateinit var adapter: HomeActivityAdapter
     private lateinit var mLayoutManager: RecyclerView.LayoutManager
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if(IS_FIRST_TIME) {
+            setAuthObservables()
+            viewModel.createUser()
+            IS_FIRST_TIME = false
+        }
+
+    }
 
     fun showSearchGame() {
         val alertView = LayoutInflater.from(requireContext())
@@ -44,11 +58,20 @@ abstract class BaseFragment : Fragment(), TextWatcher {
         alertView.setPadding(50, 0, 50, 0)
         dialog.show()
 
-        setObservables()
+        setSearchObservables()
 
     }
 
-    private fun setObservables() {
+    private fun setAuthObservables() {
+        viewModel.viewState.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is ViewState.UserLogged -> userLoggedToServer()
+            }
+        })
+
+    }
+
+    private fun setSearchObservables() {
         viewModel.viewState.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is ViewState.RefreshSearch -> showList(it.items)
@@ -72,8 +95,15 @@ abstract class BaseFragment : Fragment(), TextWatcher {
         searchProgress.visibility = View.GONE
     }
 
+    private fun userLoggedToServer() {
+        Log.i("AUTH", "Connected")
+        val cToast = CToast(requireContext())
+        cToast.showInfo(getString(R.string.connected_to_server))
+    }
+
     private fun showList(gamesRequest: GamesRequest?) {
-        adapter = HomeActivityAdapter(requireContext(), gamesRequest!!.gameLists)
+        adapter = HomeActivityAdapter(requireContext(),
+            gamesRequest!!.gameLists, fromSearch = true)
         adapter.notifyDataSetChanged()
         recyclerViewSearch.adapter = adapter
 
@@ -88,6 +118,10 @@ abstract class BaseFragment : Fragment(), TextWatcher {
 
     override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
+    }
+
+    companion object {
+        var IS_FIRST_TIME = true
     }
 }
 
