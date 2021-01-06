@@ -10,8 +10,8 @@ android {
         applicationId "com.mizanidev.deals"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 4
+        versionName "1.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
@@ -47,8 +47,10 @@ dependencies {
     implementation "org.koin:koin-androidx-fragment:$koin_version"
     implementation 'com.valdesekamdem.library:md-toast:0.9.0'
 
-    def billing_version = '3.0.0'
-    implementation "com.android.billingclient:billing-ktx:$billing_version"
+//    def billing_version = '3.0.0'
+//    implementation "com.android.billingclient:billing-ktx:$billing_version"
+
+    implementation 'com.anjlab.android.iab.v3:library:1.0.44'
 
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'

@@ -5,11 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.android.billingclient.api.BillingFlowParams
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -18,13 +13,12 @@ import com.mizanidev.deals.R
 import com.mizanidev.deals.api.Request
 import com.mizanidev.deals.model.feedback.Suggestions
 import com.mizanidev.deals.model.game.SingleGameRequest
+import com.mizanidev.deals.model.generic.AdMobError
 import com.mizanidev.deals.model.generic.KnowsBugs
 import com.mizanidev.deals.model.others.CurrencyData
 import com.mizanidev.deals.model.generic.Settings
 import com.mizanidev.deals.model.generic.SettingsIds
-import com.mizanidev.deals.util.CToast
-import com.mizanidev.deals.util.Url
-import com.mizanidev.deals.util.Util
+import com.mizanidev.deals.util.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -200,7 +194,19 @@ class DealsViewModel(private val context: Context,
     }
 
     private fun rateApp(){
+        val uri = Uri.parse("market:details?id=".plus(context.packageName))
+        val intent = Intent(Intent.ACTION_VIEW, uri)
 
+        viewState.value = ViewState.RateApp(intent)
+        viewState.value = ViewState.Idle
+
+    }
+
+    fun registerErrorOnAd(context: Context, adMobError: AdMobError) {
+        val sharedPreferenceUtil = SharedPreferenceUtil(context)
+        dbRef.child("admob").child("errors")
+            .child(sharedPreferenceUtil.stringConfig(SharedPreferenceConstants.UUID))
+            .setValue(adMobError)
     }
 
 }

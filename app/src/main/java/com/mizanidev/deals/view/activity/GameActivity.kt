@@ -11,13 +11,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.InterstitialAd
-import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.*
 import com.mizanidev.deals.BuildConfig
 import com.mizanidev.deals.R
 import com.mizanidev.deals.model.game.SingleGameRequestInfo
+import com.mizanidev.deals.model.generic.AdMobError
 import com.mizanidev.deals.util.Url
 import com.mizanidev.deals.util.Util
 import com.mizanidev.deals.viewmodel.DealsViewModel
@@ -62,8 +60,7 @@ class GameActivity : AppCompatActivity() {
         initComponents()
         configureViewModel(slug)
         setObservables()
-        configAds()
-        showAds()
+        startAds()
     }
 
     private fun initComponents(){
@@ -223,6 +220,14 @@ class GameActivity : AppCompatActivity() {
 
     }
 
+    private fun startAds() {
+        if(!Util.APP_PURCHASED) {
+            configAds()
+            showAds()
+        }
+
+    }
+
     private fun configAds() {
         mInterstitialAd = InterstitialAd(this)
 
@@ -237,6 +242,15 @@ class GameActivity : AppCompatActivity() {
         mInterstitialAd.adListener = object: AdListener() {
             override fun onAdLoaded() {
                 mInterstitialAd.show()
+            }
+
+            override fun onAdFailedToLoad(p0: LoadAdError?) {
+                super.onAdFailedToLoad(p0)
+                if(p0?.message != null) {
+                    val adMobError = AdMobError(p0.message)
+                    viewModel.registerErrorOnAd(this@GameActivity, adMobError)
+                }
+
             }
         }
     }

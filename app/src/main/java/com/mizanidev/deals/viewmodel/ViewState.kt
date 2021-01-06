@@ -1,5 +1,6 @@
 package com.mizanidev.deals.viewmodel
 
+import android.content.Intent
 import com.mizanidev.deals.model.game.SingleGameRequestInfo
 import com.mizanidev.deals.model.generalapi.GamesList
 import com.mizanidev.deals.model.generalapi.GamesRequest
@@ -30,6 +31,8 @@ sealed class ViewState {
     object SuggestionSent: ViewState()
     object SuggestionError: ViewState()
     object StartPurchase: ViewState()
+
+    data class RateApp(var intent: Intent): ViewState()
 
     //Search
     object SearchLoading: ViewState()

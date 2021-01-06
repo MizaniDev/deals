@@ -3,8 +3,12 @@ package com.mizanidev.deals.view.fragments.onsale.viewmodel
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.database.DatabaseReference
 import com.mizanidev.deals.api.Request
 import com.mizanidev.deals.model.generalapi.GamesRequest
+import com.mizanidev.deals.model.generic.AdMobError
+import com.mizanidev.deals.util.SharedPreferenceConstants
+import com.mizanidev.deals.util.SharedPreferenceUtil
 import com.mizanidev.deals.viewmodel.BaseViewModel
 import com.mizanidev.deals.viewmodel.ViewState
 import kotlinx.coroutines.CoroutineScope
@@ -15,7 +19,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.lang.Exception
 
-class OnSaleViewModel : BaseViewModel() {
+class OnSaleViewModel(private val dbRef: DatabaseReference) : BaseViewModel() {
     val viewState = MutableLiveData<ViewState>()
     private val scope = CoroutineScope(Job())
 
@@ -77,5 +81,12 @@ class OnSaleViewModel : BaseViewModel() {
                 viewState.value = ViewState.Idle
             }
         }
+    }
+
+    fun registerErrorOnAd(context: Context, adMobError: AdMobError) {
+        val sharedPreferenceUtil = SharedPreferenceUtil(context)
+        dbRef.child("admob").child("errors")
+            .child(sharedPreferenceUtil.stringConfig(SharedPreferenceConstants.UUID))
+            .setValue(adMobError)
     }
 }

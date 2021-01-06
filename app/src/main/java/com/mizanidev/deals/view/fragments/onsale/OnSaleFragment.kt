@@ -9,17 +9,18 @@ import android.widget.ProgressBar
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.InterstitialAd
-import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.initialization.InitializationStatus
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.mizanidev.deals.BuildConfig
 import com.mizanidev.deals.R
 import com.mizanidev.deals.model.generalapi.GamesList
 import com.mizanidev.deals.model.generalapi.GamesRequest
+import com.mizanidev.deals.model.generic.AdMobError
 import com.mizanidev.deals.util.CToast
 import com.mizanidev.deals.util.SharedPreferenceConstants
+import com.mizanidev.deals.util.Util
 import com.mizanidev.deals.util.recyclerview.OnLoadMoreListener
 import com.mizanidev.deals.util.recyclerview.RecyclerViewLoadMoreScroll
 import com.mizanidev.deals.view.activity.HomeActivityAdapter
@@ -54,8 +55,8 @@ class OnSaleFragment : BaseFragment() {
         initComponents(view)
         setObservables()
         makeRequest()
-        configAds()
-        showAds()
+        startAds()
+
     }
 
     private fun initComponents(view: View) {
@@ -150,10 +151,25 @@ class OnSaleFragment : BaseFragment() {
         loadingRow.visibility = View.GONE
         adapter.addMore(loadMoreItemsCells)
         scrollListener.loaded()
+
+        restartAds++
+        if(restartAds >= 5) {
+            restartAds = 0
+            startAds()
+        }
     }
 
     companion object {
         var nextPage: String? = null
+        var restartAds: Int = 0
+    }
+
+    private fun startAds() {
+        if(!Util.APP_PURCHASED) {
+            configAds()
+            showAds()
+        }
+
     }
 
     private fun configAds() {
@@ -170,6 +186,15 @@ class OnSaleFragment : BaseFragment() {
         mInterstitialAd.adListener = object: AdListener() {
             override fun onAdLoaded() {
                 mInterstitialAd.show()
+            }
+
+            override fun onAdFailedToLoad(p0: LoadAdError?) {
+                super.onAdFailedToLoad(p0)
+                if(p0?.message != null) {
+                    val adMobError = AdMobError(p0.message)
+                    viewModel.registerErrorOnAd(requireContext(), adMobError)
+                }
+
             }
         }
     }

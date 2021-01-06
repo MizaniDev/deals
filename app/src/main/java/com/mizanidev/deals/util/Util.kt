@@ -50,4 +50,8 @@ class Util(val context: Context) {
         val sharedPreferenceUtil = SharedPreferenceUtil(context)
         return sharedPreferenceUtil.stringConfig(SharedPreferenceConstants.UUID)
     }
+
+    companion object {
+        var APP_PURCHASED = false
+    }
 }

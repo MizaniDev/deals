@@ -1,5 +1,6 @@
 package com.mizanidev.deals.view.fragments.settings
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.billingclient.api.BillingFlowParams
 import com.mizanidev.deals.BuildConfig
 import com.mizanidev.deals.R
 import com.mizanidev.deals.model.feedback.Suggestions
@@ -27,6 +27,7 @@ import com.mizanidev.deals.view.fragments.settings.currency.CurrencyCallback
 import com.mizanidev.deals.viewmodel.DealsViewModel
 import com.mizanidev.deals.viewmodel.ViewState
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import java.lang.Exception
 
 private const val REGION_VIEW = 1
 private const val HELP_US = 2
@@ -54,6 +55,7 @@ class SettingsFragment: BaseFragment(),
         observeViewModel()
 
         util = Util(requireContext())
+        configureBilling()
     }
 
     private fun initComponents(view: View){
@@ -111,6 +113,7 @@ class SettingsFragment: BaseFragment(),
                 is ViewState.StartPurchase -> startPurchaseFlow()
                 is ViewState.ShowBugs -> showBugs(it.items)
                 is ViewState.NoBugs -> noBugs()
+                is ViewState.RateApp -> rateApp(it.intent)
             }
         })
     }
@@ -249,13 +252,24 @@ class SettingsFragment: BaseFragment(),
         cToast.showInfo(getString(R.string.no_bugs_found))
     }
 
-    private fun startPurchaseFlow() {
-        //TODO implementar sistema de pagamento
-//        val flowParams = BillingFlowParams.newBuilder()
-//            .setSkuDetails(skuDetails)
-//            .build()
-//
-//        val responseCode = billingClient
-//            .launchBillingFlow(activity, flowParams).responseCode
+    private fun rateApp(intent: Intent) {
+        try {
+            startActivity(intent)
+        } catch (exception: Exception) {
+            val cToast = CToast(requireContext())
+            cToast.showError(getString(R.string.market_not_found))
+        }
     }
+
+    private fun configureBilling() {
+
+    }
+
+    private fun startPurchaseFlow() {
+        billingProcessor?.purchase(activity,
+            "deals_removeads_2020")
+    }
+
 }
+
+

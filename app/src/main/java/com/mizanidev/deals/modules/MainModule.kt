@@ -26,7 +26,7 @@ val mainModule = module {
     }
 
 
-    viewModel { OnSaleViewModel() }
+    viewModel { OnSaleViewModel(dbRef = get()) }
     viewModel { ReleasesViewModel() }
     viewModel { SoonViewModel() }
 

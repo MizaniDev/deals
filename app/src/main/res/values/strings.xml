@@ -60,6 +60,9 @@
     <string name="bug_notsolved_description"><b>%1$s</b>\n%2$s\nAinda não corrigido.</string>
     <string name="no_bugs_found">Nenhum bug encontrado :)</string>
 
+    <string name="market_not_found">Acesso a loja não disponível</string>
+    <string name="error_purchase">Erro ao concluir a compra</string>
+
     <string name="connected_to_server">Conectado ao servidor</string>
 
     <string name="interstitial_ad_sample">Interstitial Ad Sample</string>
@@ -67,6 +70,6 @@
     <string name="next_level">Next Level</string>
 
     <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="interstitial_ad_unit_id_prod">cca-app-pub-3559495117114477/7650343479</string>
+    <string name="interstitial_ad_unit_id_prod">ca-app-pub-3559495117114477/7650343479</string>
 
 </resources>

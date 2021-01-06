@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.anjlab.android.iab.v3.BillingProcessor
 import com.mizanidev.deals.R
 import com.mizanidev.deals.model.generalapi.GamesRequest
 import com.mizanidev.deals.util.CToast
@@ -23,6 +24,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 abstract class BaseFragment : Fragment(), TextWatcher {
     var listener: DealsInterface? = null
+    var billingProcessor: BillingProcessor? = null
+
     private val viewModel: BaseFragmentViewModel by viewModel()
 
     private lateinit var searchProgress: ProgressBar
